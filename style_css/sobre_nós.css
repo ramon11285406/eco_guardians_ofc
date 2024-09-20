@@ -1,0 +1,176 @@
+/* Configuração geral do corpo da página */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif; /* Fonte mais moderna */
+  background: linear-gradient(to bottom right, #a8d8a1, #e2f0e7); /* Gradiente suave de verde e branco */
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+/* Estilização do cabeçalho */
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  max-width: 1200px; /* Largura máxima consistente com o index.css */
+  margin: 0 auto; /* Centraliza horizontalmente */
+  background-color: #FFFFFF;
+  border: 1px solid #D1E0D5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* position: fixed; Fixado no topo */
+  position: relative; /* Adiciona posição relativa para garantir a centralização correta */
+  top: 0; /* Fica no topo da página */
+  width: 100%; /* Ocupa a largura total da página */
+  z-index: 1000; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+
+header.navbar .navbar-brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #2F6D4F; /* Verde escuro */
+  text-decoration: none;
+}
+
+header.navbar .nav-buttons {
+  display: flex;
+  align-items: center;
+}
+
+header.navbar .nav-buttons .btn {
+  margin-left: 15px;
+  color: #FFFFFF !important;
+  background-color: #2F6D4F; /* Verde escuro */
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px; /* Padding ajustado */
+  text-decoration: none !important;
+  font-size: 1rem;
+}
+
+header.navbar .nav-buttons .btn:hover {
+  background-color: #23593C;
+}
+
+/* Seção Sobre Nós */
+#sobre-nos {
+  max-width: 1200px; /* Mantém a largura máxima da seção */
+  margin: 60px auto;
+  padding: 20px; /* Ajustado para se alinhar com outros estilos */
+  background-color: #FFFFFF; /* Fundo branco */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos e textos da seção Sobre Nós */
+#sobre-nos h2 {
+  font-size: 1.8rem; /* Ajustado para consistir com o estilo dos outros títulos */
+  margin-bottom: 20px;
+  color: #2F6D4F; /* Cor do título da seção */
+}
+
+#sobre-nos h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #2F6D4F; /* Cor dos subtítulos */
+}
+
+#sobre-nos p {
+  font-size: 1rem; /* Ajustado para consistir com o estilo do texto */
+  color: #333;
+}
+
+#sobre-nos ul {
+  list-style: none; /* Remove os marcadores da lista */
+  padding: 0;
+}
+
+#sobre-nos ul li {
+  font-size: 1rem; /* Ajustado para consistir com o estilo da lista */
+  color: #333;
+}
+
+#sobre-nos a {
+  color: #333; /* Cor dos links */
+  text-decoration: none !important; /* Remove o sublinhado dos links */
+}
+
+#sobre-nos a:hover {
+  text-decoration: underline; /* Sublinha o link ao passar o mouse */
+}
+
+/* Estilização das cards */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  border-radius: 8px 8px 0 0; /* Bordas arredondadas no topo da imagem */
+}
+
+.card-body {
+  padding: 15px;
+}
+
+/* Estilização do botão secundário */
+.btn-secondary {
+  background-color: #6c757d; /* Cinza escuro */
+  border: none;
+  color: #FFFFFF !important; /* Garantir que a cor do texto seja branca */
+  border-radius: 5px;
+  padding: 10px 20px; /* Padding ajustado */
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Cinza mais escuro ao passar o mouse */
+}
+
+/* Consultas de mídia para responsividade */
+
+/* Para dispositivos móveis (até 600px) */
+/* Responsividade */
+@media (max-width: 1135px) {
+  .navbar-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: #2c6f41;
+      width: 200px;
+      padding: 10px;
+  }
+
+
+  .navbar-toggle {
+      display: block;
+  }
+
+  .navbar-menu.show {
+      display: flex;
+  }
+
+  .navbar-menu ul {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+}
+
+
+
+
+  

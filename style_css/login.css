@@ -1,0 +1,204 @@
+/* login.css */
+
+/* Configuração geral do corpo da página */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(to bottom right, #a8d8a1, #e2f0e7);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+/* Estilização do cabeçalho */
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  background: #2c6f41; /* Cor de fundo verde escuro */
+  color: #fff;
+  margin: 0 auto; /* Centraliza horizontalmente */
+  border: 1px solid #D1E0D5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fixado no topo */
+  top: 0; /* Fica no topo da página */
+  left: 0;
+  width: 100%; /* Ocupa a largura total da página */
+  z-index: 1000; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+
+.navbar-brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+/* Estilo do menu para dispositivos móveis */
+header.navbar .nav-buttons {
+  display: flex;
+}
+
+/* Estilo do botão Login */
+.btn-paginainicial {
+  margin-left: 15px;
+  color: #FFFFFF;
+  background: #2c6f41;
+  border: 1px solid #FFFFFF;
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.btn-paginainicial:hover {
+  background-color: #23593C;
+}
+
+/* Estilização do contêiner principal */
+.container {
+  max-width: 600px; /* Largura máxima do contêiner */
+  margin: 60px auto;
+  padding: 20px; /* Reduz o padding do contêiner */
+  background-color: #FFFFFF; /* Fundo branco */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilização das seções de formulário */
+#login-section, #recover-password-section, #register-section {
+  text-align: center;
+  width: 100%; /* Garante que a seção ocupe toda a largura do container */
+  max-width: 500px; /* Reduz a largura máxima das seções */
+  margin: 0 auto; /* Centraliza a seção */
+  padding: 15px; /* Reduz o padding para o conteúdo das seções */
+  box-sizing: border-box; /* Inclui padding e borda no cálculo da largura */
+}
+
+h1 {
+  font-size: 2rem; /* Ajusta o tamanho do título */
+  color: #333; /* Verde escuro */
+  margin-bottom: 15px; /* Reduz a margem inferior */
+}
+
+.login-form, .recovery-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-field {
+  width: 100%;
+  max-width: 100%; /* Garante que os inputs não excedam a largura da seção */
+  padding: 8px; /* Reduz o padding dos campos de input */
+  border: 1px solid #D1E0D5; /* Borda verde claro */
+  border-radius: 8px;
+  margin-bottom: 15px; /* Reduz a margem inferior */
+  font-size: 0.9rem; /* Reduz o tamanho da fonte */
+  box-sizing: border-box; /* Inclui padding e borda no cálculo da largura */
+}
+
+.button {
+  background-color: #2F6D4F; /* Verde escuro */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px; /* Reduz o padding dos botões */
+  font-size: 1rem; /* Ajusta o tamanho da fonte */
+  cursor: pointer; /* Adiciona o cursor pointer */
+  margin-top: 10px;
+}
+
+.button:hover {
+  background-color: #23593C; /* Verde mais escuro ao passar o mouse */
+}
+
+/* Estilização dos botões da tag "p" */
+.forgot-password, .register, .login-link {
+  margin-top: 10px;
+}
+
+.forgot-password a, .register a, .login-link a {
+  color: #2F6D4F; /* Verde escuro */
+  text-decoration: none;
+}
+
+.forgot-password a:hover, .register a:hover, .login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Estilização dos botões de recuperação e cadastro */
+.recovery-form button {
+  background-color: #2F6D4F; /* Verde escuro */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px; /* Reduz o padding dos botões */
+  font-size: 1rem; /* Ajusta o tamanho da fonte */
+  cursor: pointer; /* Adiciona o cursor pointer */
+}
+
+.recovery-form button:hover {
+  background-color: #23593C; /* Verde mais escuro ao passar o mouse */
+}
+
+/* Responsividade */
+@media (max-width: 1135px) {
+  .navbar-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: #2c6f41;
+      width: 200px;
+      padding: 10px;
+  }
+
+
+  .navbar-toggle {
+      display: block;
+  }
+
+  .navbar-menu.show {
+      display: flex;
+  }
+
+  .navbar-menu ul {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,203 @@
+/* Configuração geral do corpo da página */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(to bottom right, #a8d8a1, #e2f0e7);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+/* Estilização do cabeçalho */
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  background: #2c6f41; /* Cor de fundo verde escuro */
+  color: #fff;
+  margin: 0 auto; /* Centraliza horizontalmente */
+  border: 1px solid #D1E0D5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fixado no topo */
+  top: 0; /* Fica no topo da página */
+  left: 0;
+  width: 100%; /* Ocupa a largura total da página */
+  z-index: 1000; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+
+.navbar-brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+/* Estilo do menu para dispositivos móveis */
+header.navbar .nav-buttons {
+  display: flex;
+}
+
+/* Estilo do botão Login */
+.btn-paginainicial {
+  margin-left: 15px;
+  color: #FFFFFF;
+  background: #2c6f41;
+  border: 1px solid #FFFFFF;
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.btn-paginainicial:hover {
+  background-color: #23593C;
+}
+
+/* Seção de Contato */
+#contato {
+  max-width: 900px; /* Ajustado para largura semelhante ao login */
+  margin: 60px auto;
+  padding: 20px;
+  background-color: #FFFFFF; /* Fundo branco */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos e textos da seção de contato */
+#contato h2 {
+  font-size: 2rem; /* Ajuste no tamanho da fonte */
+  margin-bottom: 20px;
+  color: #2F6D4F; /* Verde escuro */
+}
+
+#contato p {
+  font-size: 0.9rem; /* Ajuste no tamanho da fonte */
+  color: #333;
+}
+
+#contato a {
+  color: #2F6D4F; /* Verde escuro */
+  text-decoration: none; /* Remove o sublinhado dos links */
+}
+
+#contato a:hover {
+  text-decoration: underline; /* Sublinha o link ao passar o mouse */
+}
+
+/* Estilização do formulário */
+.form-label {
+  font-size: 0.9rem; /* Ajuste no tamanho da fonte */
+  color: #333; /* Cor do rótulo */
+}
+
+.form-control {
+  border-radius: 8px; /* Bordas arredondadas para os campos de formulário */
+  padding: 8px; /* Reduz o padding dos campos de input */
+  border: 1px solid #D1E0D5; /* Borda verde claro */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilização dos botões */
+.btn-primary {
+  background-color: #2F6D4F; /* Verde escuro */
+  border: none;
+  color: #FFFFFF;
+  border-radius: 8px;
+  padding: 10px 20px; /* Ajusta o padding dos botões */
+}
+
+.btn-primary:hover {
+  background-color: #23593C; /* Verde mais escuro ao passar o mouse */
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Cinza escuro */
+  border: none;
+  color: #FFFFFF !important; /* Garantir que a cor do texto seja branca */
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-decoration: none !important; /* Remove o sublinhado do texto do botão */
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Cinza mais escuro ao passar o mouse */
+}
+
+/* Consultas de mídia para responsividade */
+
+/* Para dispositivos móveis (até 600px) */
+@media (max-width: 600px) {
+  header.navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 10px; /* Reduz o padding em dispositivos móveis */
+  }
+
+  header.navbar .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  #contato {
+    max-width: 100%; /* Ajusta a largura máxima para 100% */
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+/* Para tablets (entre 600px e 992px) */
+@media (min-width: 600px) and (max-width: 992px) {
+  header.navbar {
+    flex-direction: row;
+    padding: 0 20px; /* Ajusta o padding */
+  }
+
+  header.navbar .navbar-brand {
+    font-size: 1.4rem;
+  }
+
+  #contato {
+    padding: 15px;
+  }
+
+  .btn {
+    padding: 10px 15px;
+  }
+}
+
+/* Para telas grandes (acima de 992px) */
+@media (min-width: 992px) {
+  
+
+  header.navbar .navbar-brand {
+    font-size: 1.6rem; /* Mantido o tamanho da fonte */
+  }
+
+  #contato {
+    max-width: 1600px; /* Largura máxima ajustada para telas grandes */
+    padding: 30px; /* Aumentado o padding para mais espaço interno */
+    margin: 0 auto; /* Centraliza a seção */
+  }
+
+  .btn {
+    padding: 12px 24px; /* Ajustado o padding dos botões para um tamanho mais consistente */
+  }
+}
+
+
+
+
+
+
+
+  

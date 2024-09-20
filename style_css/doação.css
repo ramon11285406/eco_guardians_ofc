@@ -1,0 +1,273 @@
+/* Configuração geral do corpo da página */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(to bottom right, #a8d8a1, #e2f0e7);
+  color: #333;
+  margin: 60px auto 20px auto; /* Espaçamento centralizado */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+/* Estilização do cabeçalho */
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  background: #2c6f41; /* Cor de fundo verde escuro */
+  color: #fff;
+  margin: 0 auto; /* Centraliza horizontalmente */
+  border: 1px solid #D1E0D5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fixado no topo */
+  top: 0; /* Fica no topo da página */
+  left: 0;
+  width: 100%; /* Ocupa a largura total da página */
+  z-index: 1000; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+
+.navbar-brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+/* Estilo do menu para dispositivos móveis */
+header.navbar .nav-buttons {
+  display: flex;
+}
+
+/* Estilo do botão Login */
+.btn-paginainicial {
+  margin-left: 15px;
+  color: #FFFFFF;
+  background: #2c6f41;
+  border: 1px solid #FFFFFF;
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.btn-paginainicial:hover {
+  background-color: #23593C;
+}
+
+/* Seção de Doação */
+#doacao {
+  max-width: 1200px; /* Ajustado para largura semelhante à seção em outras páginas */
+  margin: 60px auto; /* Centraliza a seção e adiciona margem superior */
+  padding: 20px; /* Padding ajustado */
+  background-color: #FFFFFF; /* Fundo branco */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos e textos da seção de doação */
+#doacao h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #23593C; /* Cor do título da seção */
+}
+
+#doacao p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#doacao ul {
+  list-style: none; /* Remove os marcadores da lista */
+  padding: 0;
+}
+
+#doacao ul li {
+  font-size: 1rem;
+  color: #333 !important;
+  margin-bottom: 10px;
+}
+
+#doacao a {
+  color: #FFFFFF; /* Cor dos links */
+  text-decoration: none !important; /* Remove o sublinhado dos links */
+}
+
+#doacao a:hover {
+  text-decoration: underline; /* Sublinha o link ao passar o mouse */
+}
+
+/* Estilização dos cards */
+.card {
+  border: none;
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 15px; /* Padding ajustado */
+}
+
+.card-title {
+  font-size: 1.5rem;
+  color: #23593C; /* Cor do título do card */
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Estilização dos botões */
+.btn-primary {
+  background-color: #23593C; /* Azul primário */
+  border: none;
+  color: #FFFFFF;
+  border-radius: 5px;
+  padding: 10px 20px; /* Padding ajustado */
+}
+
+.btn-primary:hover {
+  background-color: #23593C; /* Azul mais escuro ao passar o mouse */
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Cinza escuro */
+  border: none;
+  color: #FFFFFF !important; /* Garantir que a cor do texto seja branca */
+  border-radius: 5px;
+  padding: 10px 20px; /* Padding ajustado */
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Cinza mais escuro ao passar o mouse */
+}
+
+/* Estilização do formulário */
+form {
+  margin-top: 20px;
+}
+
+.form-label {
+  font-size: 1rem;
+  color: #333; /* Cor do rótulo */
+}
+
+.form-control {
+  border-radius: 5px; /* Bordas arredondadas para os campos de formulário */
+  padding: 10px;
+  border: 1px solid #DDDDDD; /* Borda cinza clara */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-select {
+  border-radius: 5px; /* Bordas arredondadas para selects */
+  border: 1px solid #DDDDDD; /* Borda cinza clara */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #23593C;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* Estilização dos campos de método de doação */
+#pix-campos, #transferencia-campos, #boleto-campos {
+  margin-top: 20px;
+}
+
+#pix-campos img, #transferencia-campos img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ocultar elementos inicialmente */
+.d-none {
+  display: none;
+}
+
+/* Botão de Voltar à Página Inicial */
+.text-center.mt-4 .btn {
+  margin-top: 20px;
+}
+
+/* Consultas de mídia para responsividade */
+
+/* Para dispositivos móveis (até 600px) */
+@media (max-width: 600px) {
+  header.navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px; /* Ajuste no padding */
+  }
+
+  header.navbar .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  #doacao {
+    max-width: 100%; /* Ajusta a largura máxima para 100% */
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+/* Para tablets (entre 600px e 992px) */
+@media (min-width: 600px) and (max-width: 992px) {
+  header.navbar {
+    flex-direction: row;
+    padding: 0 20px; /* Ajuste no padding */
+  }
+
+  header.navbar .navbar-brand {
+    font-size: 1.4rem;
+  }
+
+  #doacao {
+    padding: 20px;
+  }
+
+  .btn {
+    padding: 10px 15px;
+  }
+}
+
+/* Para telas grandes (acima de 992px) */
+@media (min-width: 992px) {
+  
+
+  header.navbar .navbar-brand {
+    font-size: 1.5rem; /* Mantido o tamanho da fonte */
+  }
+
+  #doacao {
+    max-width: 1600px; /* Largura máxima ajustada para telas grandes */
+    padding: 30px; /* Aumentado o padding para mais espaço interno */
+    margin: 0 auto; /* Centraliza a seção */
+  }
+
+  .btn {
+    padding: 12px 24px; /* Ajustado o padding dos botões para um tamanho mais consistente */
+  }
+}
+
+
+  
+  
+
+  
+
+
+  
+
+

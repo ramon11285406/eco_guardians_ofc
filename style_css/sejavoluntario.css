@@ -1,0 +1,163 @@
+/* Configuração geral do corpo da página */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(to bottom right, #a8d8a1, #e2f0e7);
+  color: #333;
+  margin: 60px auto 20px auto; /* Espaçamento centralizado */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+/* Estilização do cabeçalho */
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  background: #2c6f41; /* Cor de fundo verde escuro */
+  color: #fff;
+  margin: 0 auto; /* Centraliza horizontalmente */
+  border: 1px solid #D1E0D5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fixado no topo */
+  top: 0; /* Fica no topo da página */
+  left: 0;
+  width: 100%; /* Ocupa a largura total da página */
+  z-index: 1000; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+
+.navbar-brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+/* Estilo do menu para dispositivos móveis */
+header.navbar .nav-buttons {
+  display: flex;
+}
+
+/* Estilo do botão Login */
+.btn-paginainicial {
+  margin-left: 15px;
+  color: #FFFFFF;
+  background: #2c6f41;
+  border: 1px solid #FFFFFF;
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.btn-paginainicial:hover {
+  background-color: #23593C;
+}
+
+/* Estilização da seção principal */
+section#voluntariado {
+  max-width: 1200px; /* Define a largura máxima da seção */
+  margin: 60px auto; /* Centraliza a seção e adiciona margem superior */
+  padding: 20px; /* Padding ajustado */
+  background: #FFFFFF; /* Fundo branco para a seção */
+  border: 1px solid #DDDDDD; /* Borda cinza clara */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilização das cards */
+.card {
+  border: none;
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  border-radius: 8px 8px 0 0; /* Bordas arredondadas no topo da imagem */
+}
+
+.card-body {
+  padding: 15px;
+}
+
+/* Estilização dos botões */
+.btn-primary {
+  background-color: #2F6D4F; /* Azul primário */
+  border: none;
+  color: #FFFFFF;
+  border-radius: 5px;
+  padding: 10px 20px; /* Padding ajustado */
+}
+
+.btn-primary:hover {
+  background-color: #2F6D4F; /* Azul mais escuro ao passar o mouse */
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Cinza escuro */
+  border: none;
+  color: #FFFFFF !important; /* Garantir que a cor do texto seja branca */
+  border-radius: 5px;
+  padding: 10px 20px; /* Padding ajustado */
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Cinza mais escuro ao passar o mouse */
+}
+
+/* Ajustes no formulário */
+form .form-control, form .form-select {
+  border-radius: 5px;
+  border: 1px solid #DDDDDD; /* Borda cinza clara */
+}
+
+form .form-control:focus, form .form-select:focus {
+  border-color: #2F6D4F;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* Consultas de mídia para responsividade */
+
+/* Para dispositivos móveis (até 600px) */
+/* Responsividade */
+@media (max-width: 1135px) {
+  .navbar-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: #2c6f41;
+      width: 200px;
+      padding: 10px;
+  }
+
+
+  .navbar-toggle {
+      display: block;
+  }
+
+  .navbar-menu.show {
+      display: flex;
+  }
+
+  .navbar-menu ul {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+}
+
+
+
+  
