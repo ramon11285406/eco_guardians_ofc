@@ -309,14 +309,16 @@ textarea.form-control {
 }
 
 .btn-custom {
-  background-color: #2F6D4F; /* Verde escuro */
-  color: white;
-  border: none;
+  font-weight: bold;
+  color: #FFFFFF !important;
+  background: #2c6f41 !important;
+  border: 1px solid #FFFFFF;
+  padding: 10px 20px;
+  background-color: transparent;
 }
 
 .btn-custom:hover {
-  background-color: #FFFFFF;
-  color: #a8d8a1;
+  color: #FFFFFF !important;
 }
 
 .card-description {
