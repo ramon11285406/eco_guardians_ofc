@@ -4,7 +4,7 @@
 //     const email = document.getElementById('email').value;
 //     const password = document.getElementById('password').value;
 
-//     const loginButton = document.getElementById('login-button');
+//     const loginButton = document.getElementById('button');
 //     const recoverPasswordButton = document.getElementById('recover-password-button');
 
 //     loginButton.disabled = !(email.trim() !== "" && password.trim() !== "");
@@ -15,24 +15,21 @@
 //     document.getElementById('password').addEventListener('input', validateFields);
 
     
-//esse cod faz auntentição de login no firebase
+// esse cod faz auntentição de login no firebase
 
 // function login() {
 //     const email = document.getElementById('email').value;
 //     const password = document.getElementById('password').value;
-
+    
 //     firebase.auth().signInWithEmailAndPassword(email,password)
 //     .then(response => {
-//         window.location.href = "../../index.html";
+//         window.location.href = 'index.html';
 //         console.log('sucess', response)
 //     })
 //     .catch(error => {
 //         console.log('Erro', error.message)
 //     });
 
-// }
-// function login() {
-//     window.location.href = "index.html";
 // }
 
 // function register() {
@@ -49,27 +46,10 @@
 // };
 
 // firebase.initializeApp(firebaseConfig);
-// script.js
-
-// login.js
 
 
-// Adiciona um event listener ao formulário para exibir o carregamento ao enviar
-// login.js
 
-// login.js
 
-// Adiciona um evento ao formulário para tratar o envio
-// login.js
-
-// document.getElementById('login-form').addEventListener('submit', function(event) {
-//     event.preventDefault(); // Impede o envio padrão do formulário
-    
-//     // Simula o processo de login e redireciona após um breve atraso
-//     setTimeout(function() {
-//         window.location.href = 'index.html'; // Substitua pelo URL da página inicial ou página desejada
-//     }, 500); // Atraso de 500ms para simulação
-// });
 
 
 
