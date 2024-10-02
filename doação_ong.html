@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoGuardians</title>
+    <link rel="stylesheet" href="./style_css/reset.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="./style_css/index.css">
+</head>
+<body class="p-3 m-0 border-0 bd-example m-0 border-0">
+    <header class="navbar">
+        <div class="navbar-brand">EcoGuardians</div>
+        <button class="navbar-toggle" id="navbar-toggle">☰</button>
+        <nav class="navbar-menu" id="navbar-menu">
+            <ul>
+                <li><a href="login_ong.html">ONGs</a></li>
+                <li><a href="contato.html">Contatos</a></li>
+                <li><a href="sejavoluntario.html">Seja um Voluntário</a></li>
+                <li><a href="doação.html">Faça uma Doação</a></li>
+                <li><a href="canal_de_denuncias.html">Canal de Denúncias</a></li>
+                <li><a href="login.html" class="login-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Seção de ONGs Necessitando de Doações -->
+    <section id="ongs-necessitam-doacoes" class="mt-5">
+        <div class="container text-center">
+            <h2>ONGs Necessitando de Doações</h2>
+            <p>Contribua com as ONGs que estão precisando de apoio financeiro ou material para continuar suas ações de preservação e sustentabilidade.</p>
+            <div class="row mt-4">
+                <!-- ONG 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/eco_guardians_ofc/verdevida.jpg" class="card-img-top" alt="Imagem representativa da ONG Verde Vida">
+                        <div class="card-body">
+                            <h5 class="card-title">Verde Vida</h5>
+                            <p class="card-text"><strong>Tipo de Doação:</strong> Financeira e materiais (mudas, ferramentas de jardinagem)</p>
+                            <p class="card-text"><strong>Motivo da Necessidade:</strong> Ajude a financiar novos mutirões de plantio e a compra de mudas para áreas urbanas.</p>
+                            <p><strong>Local:</strong> Rua das Árvores, 123, São Paulo - SP</p>
+                            <h6>Informações para Transferência</h6>
+                            <p><strong>Banco:</strong> Banco do Brasil</p>
+                            <p><strong>Agência:</strong> 1234-5</p>
+                            <p><strong>Conta Corrente:</strong> 98765-4</p>
+                            <p><strong>CNPJ:</strong> 12.345.678/0001-99</p>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#doacaoModal">Doe Agora</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ONG 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/eco_guardians_ofc/marelimpa.jpg" class="card-img-top" alt="Imagem representativa da ONG Maré Limpa">
+                        <div class="card-body">
+                            <h5 class="card-title">Maré Limpa</h5>
+                            <p class="card-text"><strong>Tipo de Doação:</strong> Financeira</p>
+                            <p class="card-text"><strong>Motivo da Necessidade:</strong> Sua doação ajudará a financiar expedições de limpeza para combater a poluição marinha.</p>
+                            <p><strong>Local:</strong> Praia das Ondas, 456, Rio de Janeiro - RJ</p>
+                            <h6>Informações para Transferência</h6>
+                            <p><strong>Banco:</strong> Itaú</p>
+                            <p><strong>Agência:</strong> 5678-9</p>
+                            <p><strong>Conta Corrente:</strong> 54321-0</p>
+                            <p><strong>CNPJ:</strong> 98.765.432/0001-22</p>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#doacaoModal">Doe Agora</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ONG 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/eco_guardians_ofc/faunaprotegida.jpg" class="card-img-top" alt="Imagem representativa da ONG Fauna Protegida">
+                        <div class="card-body">
+                            <h5 class="card-title">Fauna Protegida</h5>
+                            <p class="card-text"><strong>Tipo de Doação:</strong> Materiais (alimentos para animais, medicamentos veterinários)</p>
+                            <p class="card-text"><strong>Motivo da Necessidade:</strong> Apoie os programas de reabilitação e resgate de animais ameaçados de extinção.</p>
+                            <p><strong>Local:</strong> Estrada da Natureza, 789, Curitiba - PR</p>
+                            <h6>Informações para Transferência</h6>
+                            <p><strong>Banco:</strong> Bradesco</p>
+                            <p><strong>Agência:</strong> 3456-7</p>
+                            <p><strong>Conta Corrente:</strong> 67890-1</p>
+                            <p><strong>CNPJ:</strong> 33.444.555/0001-33</p>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#doacaoModal">Doe Agora</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Doação -->
+    <div class="modal fade" id="doacaoModal" tabindex="-1" aria-labelledby="doacaoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="doacaoModalLabel">Doação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Por favor, escolha a ONG para doar diretamente em sua conta bancária.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="./scripts/index.js"></script>
+</body>
+</html>
