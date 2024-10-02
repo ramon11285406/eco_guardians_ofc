@@ -69,13 +69,9 @@ header.navbar .nav-buttons {
   background-color: #FFFFFF; /* Fundo branco */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Centraliza o texto dentro do formulário */
 }
 
 /* Estilização do formulário de login */
-.login-form {
-  text-align: center;
-}
 
 .login-form h2 {
   font-size: 2rem;
@@ -116,6 +112,8 @@ header.navbar .nav-buttons {
   border-radius: 8px;
   padding: 12px 24px;
   font-size: 1rem;
+  align-items: center !important;
+  text-align: center !important;
 }
 
 .btn-primary:hover {
