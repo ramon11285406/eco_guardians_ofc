@@ -1,7 +1,7 @@
 // Inicializa o mapa interativo (exemplo usando Leaflet)
 document.addEventListener('DOMContentLoaded', function() {
     // Cria o mapa e define a visualização inicial
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    var map = L.map('map').setView([-1.4485051,-48.4944396], 13);
 
     // Adiciona o layer de tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }).addTo(map);
 
     // Adiciona um marcador de exemplo
-    L.marker([51.5, -0.09]).addTo(map)
+    L.marker([-1.4485051,-48.4944396]).addTo(map)
         .bindPopup('Um lugar interessante.')
         .openPopup();
-
+s
     // Função para localizar o usuário
     function onLocationFound(e) {
         var radius = e.accuracy / 2;
