@@ -4,101 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EcoGuardians - Página Login</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="./style_css/login.css"> <!-- CSS unificado -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./style_css/login.css" rel="stylesheet">
 </head>
 <body>
-   <!-- Cabeçalho -->
    <header class="navbar">
     <a href="index.html" class="navbar-brand">EcoGuardians</a>
-    
-    </header>
+   </header>
 
-  <div class="container">
+   <div class="container">
     <!-- Formulário de Login -->
     <section id="login-section">
       <h1>Faça Login</h1>
       <form class="login-form" id="login-form">
         <label for="login-email">Login ou email:</label>
-        <input type="text" id="email" class="input-field" required>
+        <input type="text" id="login-email" class="input-field" required>
+        
         <label for="login-password">Senha:</label>
-        <input type="password" id="password" class="input-field" required>
-        <button type="button" class="button" id="login-button">Entrar</button>
+        <div class="input-group">
+          <input type="password" id="login-password" class="input-field" required>
+          <span id="toggle-password" ></span>
+        </div>
+    
+        <button type="submit" class="button" id="login-button" disabled>Entrar</button>
+        <div id="error-message" class="text-danger mt-2"></div>
+        
         <p class="forgot-password"><a href="#recover-password-section">Esqueceu a senha?</a></p>
         <p class="register">Não possui uma conta? <a href="#register-section">Cadastre-se</a></p>
       </form>
     </section>
 
     <!-- Formulário de Recuperação de Senha -->
-    <section id="recover-password-section" style="display: none;">
+    <section id="recover-password-section" class="d-none">
       <h1>Recuperação de Senha</h1>
-      <form class="recovery-form" action="send_recovery_link.php" method="post">
+      <form class="recovery-form">
         <label for="recover-email">Digite seu email:</label>
         <input type="email" id="recover-email" name="email" class="input-field" required>
         <button type="submit">Enviar Link de Recuperação</button>
-        <p class="login-link"> <a href="#login-section">Voltar para Login</a></p>
+        <p class="login-link"><a href="#login-section">Voltar para Login</a></p>
       </form>
     </section>
 
     <!-- Formulário de Cadastro -->
-    <section id="register-section" style="display: none;">
-      <h1>Cadastro de Novo Usuário</h1>
-      <form class="login-form" action="register_user.php" method="post">
-        <label for="register-name">Nome:</label>
-        <input type="text" id="register-name" name="nome" class="input-field" required>
+  <section id="register-section" class="d-none">
+    <h1>Cadastro de Novo Usuário</h1>
+    <form class="login-form" id="register-form"> <!-- Adicione o ID aqui -->
         <label for="register-email">Email:</label>
         <input type="email" id="register-email" name="email" class="input-field" required>
+
         <label for="register-password">Senha:</label>
         <input type="password" id="register-password" name="senha" class="input-field" required>
-        <label for="register-confirm-password">Confirmar Senha:</label>
-        <input type="password" id="register-confirm-password" name="confirmar_senha" class="input-field" required>
+
         <button type="submit" class="button">Cadastrar</button>
-        <p class="login-link"> <a href="#login-section">Já tem uma conta? Faça Login</a></p>
-      </form>
-    </section>
-  </div>
+        <p class="login-link"><a href="#login-section">Já tem uma conta? Faça Login</a></p>
+    </form>
+  </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-rbsA22s+V/LGTq0WB8xOwoARLcdXprP5S7h6Z9dVs5A+F7w2S2W6eZbRfOkT/QI" 
-  crossorigin="anonymous"></script>
-  <script>
-    // Função para alternar entre seções
-    function showSection(sectionId) {
-      // Esconde todas as seções
-      document.getElementById('login-section').style.display = 'none';
-      document.getElementById('recover-password-section').style.display = 'none';
-      document.getElementById('register-section').style.display = 'none';
 
-      // Mostra a seção desejada
-      document.getElementById(sectionId).style.display = 'block';
-    }
-
-    // Configura os eventos dos links
-    document.querySelector('.forgot-password a').addEventListener('click', function(event) {
-      event.preventDefault();
-      showSection('recover-password-section');
-    });
-
-    document.querySelector('.register a').addEventListener('click', function(event) {
-      event.preventDefault();
-      showSection('register-section');
-    });
-
-    document.querySelectorAll('.login-link a').forEach(function(link) {
-      link.addEventListener('click', function(event) {
-        event.preventDefault();
-        showSection('login-section');
-      });
-    });
-
-    // // Configura o botão de login para redirecionar
-    // document.getElementById('login-button').addEventListener('click', function() {
-    //   window.location.href = 'index.html';
-    // });
-  </script>
-  <script src="./scripts_js/login.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+  <script type="module" src="./scripts_js/login.js"></script>
 </body>
 </html>
-
-
-

@@ -90,29 +90,44 @@ h1 {
 .login-form, .recovery-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* Alinha os itens à esquerda */
 }
 
+/* Estilização das labels */
+label {
+  width: 100%; /* Faz com que a label ocupe toda a largura disponível */
+  text-align: left; /* Alinha o texto da label à esquerda */
+  margin-bottom: 8px; /* Espaço abaixo da label */
+}
+
+/* Estilização dos campos de input */
 .input-field {
   width: 100%;
-  max-width: 100%; /* Garante que os inputs não excedam a largura da seção */
-  padding: 8px; /* Reduz o padding dos campos de input */
+  padding: 12px; /* Aumenta o padding dos campos de input */
   border: 1px solid #D1E0D5; /* Borda verde claro */
   border-radius: 8px;
-  margin-bottom: 15px; /* Reduz a margem inferior */
-  font-size: 0.9rem; /* Reduz o tamanho da fonte */
+  margin-bottom: 15px; /* Espaço abaixo do input */
+  font-size: 1rem; /* Ajusta o tamanho da fonte */
   box-sizing: border-box; /* Inclui padding e borda no cálculo da largura */
 }
 
+/* Adicionando mais espaço na seção de recuperação de senha */
+#recover-password-section {
+  padding-top: 30px; /* Aumenta o espaço acima */
+  padding-bottom: 30px; /* Aumenta o espaço abaixo */
+}
+
+/* Estilização dos botões */
 .button {
   background-color: #2F6D4F; /* Verde escuro */
   color: #FFFFFF;
   border: none;
   border-radius: 8px;
-  padding: 10px 20px; /* Reduz o padding dos botões */
+  padding: 12px 20px; /* Aumenta o padding dos botões */
   font-size: 1rem; /* Ajusta o tamanho da fonte */
   cursor: pointer; /* Adiciona o cursor pointer */
-  margin-top: 10px;
+  margin-top: 15px; /* Aumenta o espaço acima do botão */
+  align-self: center; /* Centraliza o botão */
 }
 
 .button:hover {
@@ -121,7 +136,7 @@ h1 {
 
 /* Estilização dos botões da tag "p" */
 .forgot-password, .register, .login-link {
-  margin-top: 10px;
+  margin-top: 15px; /* Aumenta o espaço acima dos links */
 }
 
 .forgot-password a, .register a, .login-link a {
@@ -142,63 +157,9 @@ h1 {
   padding: 10px 20px; /* Reduz o padding dos botões */
   font-size: 1rem; /* Ajusta o tamanho da fonte */
   cursor: pointer; /* Adiciona o cursor pointer */
+  align-self: center; /* Centraliza o botão */
 }
 
 .recovery-form button:hover {
   background-color: #23593C; /* Verde mais escuro ao passar o mouse */
 }
-
-/* Responsividade */
-@media (max-width: 1135px) {
-  .navbar-menu {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background: #2c6f41;
-      width: 200px;
-      padding: 10px;
-  }
-
-
-  .navbar-toggle {
-      display: block;
-  }
-
-  .navbar-menu.show {
-      display: flex;
-  }
-
-  .navbar-menu ul {
-      flex-direction: column;
-      gap: 10px;
-  }
-
-  .footer-links {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
