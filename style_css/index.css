@@ -52,6 +52,7 @@ body {
     gap: 5px;
 }
 
+
 .navbar-menu li {
     margin-left: 20px;
 }
@@ -435,36 +436,88 @@ footer {
 
 /* Consultas de mídia para responsividade */
 
+
 /* Responsividade */
 @media (max-width: 1135px) {
-  .navbar-menu {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background: #2c6f41;
-      width: 200px;
-      padding: 10px;
-  }
+ /* Estilo do menu para dispositivos móveis */
+.navbar-menu {
+  display: none; /* Inicialmente oculto */
+  flex-direction: column; /* Alinha os itens em coluna */
+  text-align: left;
+  position: absolute; /* Para posicionar o menu */
+  top: 60px; /* Distância do topo */
+  right: 0;
+  background: #2c6f41; /* Cor de fundo verde escuro */
+  width: 200px; /* Largura do menu */
+  padding: 10px; /* Espaçamento interno */
+  border-radius: 8px; /* Bordas arredondadas */
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+}
+
+.navbar-menu.show {
+  display: flex; /* Exibe o menu quando ativado */
+  justify-content: flex-start; /* Alinha os itens à esquerda */
+}
+
+/* Estilo dos itens do menu */
+.navbar-menu ul {
+  list-style: none; /* Remove os marcadores */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Alinha os itens em coluna */
+  gap: 10px; /* Espaçamento entre os itens */
+}
+
+.navbar-menu li {
+  width: 100%; /* Faz com que os itens ocupem toda a largura */
+}
+
+/* Ajustes finais para evitar overflow */
+.navbar-menu ul li {
+  margin: 0; /* Remove margens nos itens */
+  padding: 0; /* Garante que não haja padding extra */
+  
+}
+.navbar-menu a {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn {
+  font-weight: bold;
+  color: #2c6f41;
+  background: #a8d8a1;
+  border: none;
+  padding: 10px 20px;
+  background-color: transparent;
+}
 
 
-  .navbar-toggle {
+.navbar-menu a:hover {
+  background-color: #23593C; /* Verde mais escuro */
+}
+
+.navbar-toggle {
       display: block;
-  }
+}
 
-  .navbar-menu.show {
+.navbar-menu.show {
       display: flex;
-  }
+}
 
-  .navbar-menu ul {
+.navbar-menu ul {
       flex-direction: column;
       gap: 10px;
-  }
+}
 
-  .footer-links {
+.footer-links {
       display: flex;
       flex-direction: column;
       align-items: center;
-  }
+}
 }
