@@ -1,6 +1,6 @@
-// Importando o Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyDHr2xdklSAhNvlnLdvYo0xEWF5788kH9o",
@@ -30,91 +30,188 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
-        const errorMessage = document.getElementById('error-message');
-
+        const errorMessage = document.getElementById('login-error-message');
+    
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+            .then(() => {
                 window.location.href = 'index.html';
             })
-            .catch((error) => {
-                errorMessage.textContent = 'Email ou senha incorretos.';
+            .catch(() => {
+                errorMessage.textContent = 'Email ou senha incorretos';
+                errorMessage.style.display = 'block'; // Exibe a mensagem
                 setTimeout(() => {
                     errorMessage.textContent = '';
+                    errorMessage.style.display = 'none'; // Esconde a mensagem
                 }, 2000);
             });
     });
+    
 
     // Função para mostrar/ocultar a senha
-    const passwordInput = document.getElementById('login-password');
+    const passwordInputLogin = document.getElementById('login-password');
     const eyeIcon = document.getElementById('toggle-password');
 
     eyeIcon.onclick = function() {
-        const type = passwordInput.type === 'password' ? 'text' : 'password';
-        passwordInput.type = type;
+        const type = passwordInputLogin.type === 'password' ? 'text' : 'password';
+        passwordInputLogin.type = type;
     };
 
-    passwordInput.addEventListener('focus', function() {
+    passwordInputLogin.addEventListener('focus', function() {
         eyeIcon.style.display = 'inline'; // Exibe o ícone
     });
 
-    passwordInput.addEventListener('blur', function() {
+    passwordInputLogin.addEventListener('blur', function() {
         eyeIcon.style.display = 'none'; // Esconde o ícone ao perder o foco
     });
 
+    // Cadastro de usuário
+    const passwordInputRegister = document.getElementById('register-password'); // Renomeado
+    document.getElementById('register-form').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    // cadastro de usuario
-
-    function registro() {
-        const email = document.getElementById('register-email').value
-        const password = document.getElementById('register-password').value
-        firebase.auth().createUserWithEmailAndPassword(email, password
-        ).then(() => {
-            window.location.href = "../../index.html";
-        }).catch(error => {
-            alert(error);
-        });
-    }
-
-    function registro(event) {
-        event.preventDefault(); // Previne o envio padrão do formulário
         const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
+        const password = passwordInputRegister.value; // Usando a nova variável
+        const errorMessage = document.getElementById('register-error-message');
+
+        // Verifica se a senha tem pelo menos 6 caracteres
+        if (password.length < 6) {
+            errorMessage.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+            errorMessage.style.color = 'red';
+            setTimeout(() => {
+                errorMessage.textContent = '';
+            }, 2000);
+            return; // Impede o envio do formulário
+        }
 
         createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+            // Limpa os campos do formulário
+            document.getElementById('register-email').value = '';
+            passwordInputRegister.value = ''; // Usando a nova variável
+
+            // Mostra o modal de sucesso
+            const successModal = document.getElementById('success-modal');
+            successModal.classList.remove('d-none');
+
+            // Redireciona para a seção de login ao clicar no botão
+            document.getElementById('go-to-login').onclick = function() {
+                document.getElementById('register-section').classList.add('d-none');
+                document.getElementById('login-section').classList.remove('d-none');
+                successModal.classList.add('d-none'); // Fecha o modal
+            };
+
+            // Fecha o modal ao clicar no "X"
+            document.querySelector('.close-button').onclick = function() {
+                successModal.classList.add('d-none');
+            };
+        })
+        .catch((error) => {
+            const errorMessage = document.getElementById('register-error-message');
+            errorMessage.style.color = 'red'; // Define a cor vermelha para a mensagem
+        
+            if (error.code === 'auth/email-already-in-use') {
+                errorMessage.textContent = 'Este email já está em uso.';
+            } else {
+                errorMessage.textContent = error.message; // Exibe outras mensagens de erro
+            }
+        
+            // Exibe a mensagem por 4 segundos
+            setTimeout(() => {
+                errorMessage.textContent = '';
+            }, 4000);
+        });        
+    });
+
+    // Manipulação de eventos para o campo de senha no cadastro
+    passwordInputRegister.addEventListener('focus', function() {
+        const errorMessage = document.getElementById('register-error-message');
+        errorMessage.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+        errorMessage.style.color = 'red';
+        errorMessage.classList.remove('d-none');
+    });
+
+    passwordInputRegister.addEventListener('blur', function() {
+        const errorMessage = document.getElementById('register-error-message');
+        if (passwordInputRegister.value.length < 6) {
+            errorMessage.classList.add('d-none');
+        } else {
+            errorMessage.style.color = 'green';
+            errorMessage.textContent = 'Senha válida!';
+            setTimeout(() => {
+                errorMessage.textContent = '';
+            }, 4000);
+        }
+    });
+
+    // Recuperação de senha
+    document.querySelector('.recovery-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        console.log("Formulário de recuperação enviado!"); 
+        
+        const recoverEmailInput = document.getElementById('recover-email');
+        const recoverEmail = recoverEmailInput.value;
+        const errorMessage = document.getElementById('recover-error-message'); 
+
+        sendPasswordResetEmail(auth, recoverEmail)
             .then(() => {
-                window.location.href = 'index.html'; // Redireciona após cadastro
+                console.log("Link de recuperação enviado com sucesso!");
+                errorMessage.style.color = 'green';
+                errorMessage.textContent = 'Link de recuperação enviado! Verifique seu email.';
+
+                // Limpar o campo de entrada
+                recoverEmailInput.value = '';
+
+                setTimeout(() => {
+                    errorMessage.textContent = '';
+                }, 4000);
             })
-            .catch(error => {
-                alert(error.message); // Exibe mensagem de erro
+            .catch((error) => {
+                errorMessage.style.color = 'red';
+                errorMessage.textContent = 'Email invalido';
+                
+                setTimeout(() => {
+                    errorMessage.textContent = '';
+                }, 4000);
             });
+    });
+
+    // Clear inputs
+    function clearInputs() {
+        document.getElementById('login-email').value = '';
+        document.getElementById('login-password').value = '';
+        document.getElementById('register-email').value = '';
+        document.getElementById('register-password').value = '';
+        document.getElementById('recover-email').value = '';
+        document.getElementById('login-error-message').textContent = '';
+        document.getElementById('register-error-message').textContent = '';
+        document.getElementById('recover-error-message').textContent = '';
     }
-
-    // Adiciona o listener para o formulário de registro
-    document.getElementById('register-form').addEventListener('submit', registro);
-
     
-
     // Alternância entre seções
     document.querySelector('.forgot-password a').onclick = function(e) {
         e.preventDefault(); // Previne o comportamento padrão do link
+        clearInputs();
         document.getElementById('login-section').classList.add('d-none');
         document.getElementById('recover-password-section').classList.remove('d-none');
     };
 
     document.querySelector('.register a').onclick = function(e) {
         e.preventDefault(); // Previne o comportamento padrão do link
+        clearInputs();
         document.getElementById('login-section').classList.add('d-none');
         document.getElementById('register-section').classList.remove('d-none');
     };
 
     document.querySelector('#recover-password-section .login-link a').onclick = function(e) {
         e.preventDefault(); // Previne o comportamento padrão do link
+        clearInputs();
         document.getElementById('recover-password-section').classList.add('d-none');
         document.getElementById('login-section').classList.remove('d-none');
     };
 
     document.querySelector('#register-section .login-link a').onclick = function(e) {
         e.preventDefault(); // Previne o comportamento padrão do link
+        clearInputs();
         document.getElementById('register-section').classList.add('d-none');
         document.getElementById('login-section').classList.remove('d-none');
     };
