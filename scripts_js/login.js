@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, fetchSignInMethodsForEmail} from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
 
 const firebaseConfig = {
@@ -144,36 +144,47 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Recuperação de senha
-    document.querySelector('.recovery-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        console.log("Formulário de recuperação enviado!"); 
-        
-        const recoverEmailInput = document.getElementById('recover-email');
-        const recoverEmail = recoverEmailInput.value;
-        const errorMessage = document.getElementById('recover-error-message'); 
+document.querySelector('.recovery-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    console.log("Formulário de recuperação enviado!");
 
-        sendPasswordResetEmail(auth, recoverEmail)
-            .then(() => {
-                console.log("Link de recuperação enviado com sucesso!");
-                errorMessage.style.color = 'green';
-                errorMessage.textContent = 'Link de recuperação enviado! Verifique seu email.';
+    const recoverEmailInput = document.getElementById('recover-email');
+    const recoverEmail = recoverEmailInput.value.trim(); // Remove espaços em branco
+    const errorMessage = document.getElementById('recover-error-message');
 
-                // Limpar o campo de entrada
-                recoverEmailInput.value = '';
+    // Verifique se o e-mail é válido
+    if (!recoverEmail) {
+        errorMessage.style.color = 'red';
+        errorMessage.textContent = 'Por favor, insira um e-mail válido.';
+        return;
+    }
 
-                setTimeout(() => {
-                    errorMessage.textContent = '';
-                }, 4000);
-            })
-            .catch((error) => {
-                errorMessage.style.color = 'red';
-                errorMessage.textContent = 'Email invalido';
-                
-                setTimeout(() => {
-                    errorMessage.textContent = '';
-                }, 4000);
-            });
-    });
+    // Enviar o e-mail de recuperação
+    sendPasswordResetEmail(auth, recoverEmail)
+        .then(() => {
+            console.log("Link de recuperação enviado com sucesso!");
+            errorMessage.style.color = 'green';
+            errorMessage.textContent = 'Se esse e-mail estiver cadastrado, você receberá um link de recuperação.';
+
+            // Limpar o campo de entrada
+            recoverEmailInput.value = '';
+
+            setTimeout(() => {
+                errorMessage.textContent = '';
+            }, 4000);
+        })
+        .catch((error) => {
+            console.error("Erro ao enviar o link de recuperação:", error.message);
+            errorMessage.style.color = 'red';
+            errorMessage.textContent = 'Se esse e-mail estiver cadastrado, você receberá um link de recuperação.';
+
+            setTimeout(() => {
+                errorMessage.textContent = '';
+            }, 4000);
+        });
+});
+
+    
 
     // Clear inputs
     function clearInputs() {
