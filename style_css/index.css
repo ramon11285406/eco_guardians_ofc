@@ -28,6 +28,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #D1E0D5; /* Borda verde claro */
     border-radius: 8px;
+    margin: 0 auto;
 }
 
 .navbar-brand {
@@ -100,7 +101,17 @@ body {
 #intro, #informacoes, #posts, #faq, #mapa, #ongs-parceiras, #recomendacoes, #carousel {
   width: 100%; /* Largura total */
   max-width: 1300px; /* Largura máxima padrão */
-  margin: 60px auto; /* Margem superior de 60px, centralização automática */
+  margin: 70px auto 20px auto; /* Espaçamento centralizado */ /* Margem superior de 20px, centralização automática */
+  padding: 20px;
+  background-color: #FFFFFF; /* Fundo branco */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#carousel {
+  width: 100%; /* Largura total */
+  max-width: 1300px; /* Largura máxima padrão */
+  margin: 5px auto 20px auto; /* Espaçamento centralizado */ /* Margem superior de 20px, centralização automática */
   padding: 20px;
   background-color: #FFFFFF; /* Fundo branco */
   border-radius: 10px;
