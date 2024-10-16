@@ -150,7 +150,6 @@ label {
 }
 
 
-/*codigo modal*/
 .modal {
   display: flex;
   position: fixed;
@@ -172,18 +171,25 @@ label {
   width: 300px; /* Largura do modal */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidade */
   text-align: center; /* Centraliza o texto */
+  position: relative; /* Para posicionar o botão de fechar */
 }
 
 .close-button {
   color: #aaa; /* Cor do botão de fechar */
-  float: right;
-  font-size: 20px; /* Tamanho do ícone de fechar */
+  position: absolute; /* Muda para absoluto */
+  top: 10px; /* Distância do topo */
+  right: 15px; /* Distância da direita */
+  font-size: 24px; /* Aumenta o tamanho do ícone de fechar */
   font-weight: bold;
   cursor: pointer; /* Mão ao passar o mouse */
 }
 
 .close-button:hover {
   color: black; /* Cor ao passar o mouse */
+}
+
+.modal-content h2 {
+  margin-top: 30px; /* Ajusta a margem superior do título */
 }
 
 /* Estilo para o botão "Ir para Login" */
@@ -200,3 +206,5 @@ label {
 #go-to-login:hover {
   background-color: #45a049; /* Cor ao passar o mouse */
 }
+
+

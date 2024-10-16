@@ -98,7 +98,7 @@ body {
 }
 
 /* Seções da página */
-#intro, #informacoes, #posts, #faq, #mapa, #ongs-parceiras, #recomendacoes, #carousel {
+#intro, #informacoes, #posts, #faq, #mapa, #ongs-parceiras, #recomendacoes, #carousel-section {
   width: 100%; /* Largura total */
   max-width: 1300px; /* Largura máxima padrão */
   margin: 70px auto 20px auto; /* Espaçamento centralizado */ /* Margem superior de 20px, centralização automática */
@@ -108,15 +108,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#carousel {
-  width: 100%; /* Largura total */
-  max-width: 1300px; /* Largura máxima padrão */
-  margin: 5px auto 20px auto; /* Espaçamento centralizado */ /* Margem superior de 20px, centralização automática */
-  padding: 20px;
-  background-color: #FFFFFF; /* Fundo branco */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+
 
 /* Seção Introdução */
 #intro {
@@ -140,7 +132,7 @@ body {
 }
 
 #intro img.intro-logo:hover {
-  transform: scale(1.1); /* Aumenta a escala da imagem em 10% */
+  transform: scale(1.0); /* Aumenta a escala da imagem em 10% */
   filter: brightness(110%); /* Aumenta o brilho da imagem em 10% */
 }
 
