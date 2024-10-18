@@ -38,7 +38,7 @@
                         <label for="mensagem" class="form-label">Mensagem:</label>
                         <textarea id="mensagem" name="mensagem" class="form-control" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="button" class="btn btn-primary" onclick="enviarmensagem()">Enviar</button>
                 </form>
             </div>
         </div>
@@ -47,6 +47,9 @@
             <a href="index.html" class="btn btn-secondary">Voltar para a Página Inicial</a>
         </div>
     </section>
-
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="/scripts_js/firebaseinit.js"></script>    
+<script src="/scripts_js/contato.js"></script>
 </body>
 </html>

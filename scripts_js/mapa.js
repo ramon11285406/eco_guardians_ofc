@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     L.marker([-1.4485051,-48.4944396]).addTo(map)
         .bindPopup('Um lugar interessante.')
         .openPopup();
-s
+
     // Função para localizar o usuário
     function onLocationFound(e) {
         var radius = e.accuracy / 2;
