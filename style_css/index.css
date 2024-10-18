@@ -14,87 +14,92 @@ body {
 
 /* Estilização do cabeçalho */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 20px;
-    background: #2c6f41; /* Cor de fundo verde escuro */
-    color: #fff;
-    position: fixed; /* Fixa o cabeçalho no topo */
-    width: 100%; /* Largura total do contêiner */
-    top: 0;
-    left: 0;
-    z-index: 1000; /* Garante que o cabeçalho fique sobre outros elementos */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #D1E0D5; /* Borda verde claro */
-    border-radius: 8px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alinha verticalmente todos os itens no centro */
+  padding: 5px 20px !important;
+  background: #2c6f41; /* Cor de fundo verde escuro */
+  color: #fff;
+  position: fixed; /* Fixa o cabeçalho no topo */
+  width: 100%; /* Largura total do contêiner */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Garante que o cabeçalho fique sobre outros elementos */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #D1E0D5; /* Borda verde claro */
+  border-radius: 8px;
 }
 
+/* Estilo do nome da ONG */
 .navbar-brand {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #FFFFFF;
-    text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-decoration: none;
 }
 
-/* Estilo do menu para dispositivos móveis */
+/* Estilo do menu */
 .navbar-menu {
   display: flex;
+  align-items: center; /* Alinha verticalmente os itens do menu */
 }
-/* Estilo dos itens do menu */
+
 .navbar-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px; /* Espaço uniforme entre os itens do menu */
 }
 
 .navbar-menu li {
-    margin-left: 20px;
+  display: flex; /* Garante que cada item do menu seja um flex item */
+  align-items: center; /* Alinha verticalmente o texto dentro de cada item */
 }
 
 .navbar-menu a {
-    color: #FFFFFF;
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 10px 15px;
-    border-radius: 8px;
-    transition: color 0.3s ease;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transições suaves para hover */
 }
 
 .navbar-menu a:hover {
-    background-color: #23593C; /* Verde mais escuro */
+  background-color: #23593C; /* Verde mais escuro ao passar o mouse */
 }
 
-/* Estilo do botão Login */
-.login-btn {
-    font-weight: bold;
-    color: #2c6f41;
-    background: #a8d8a1;
-    border: 1px solid #FFFFFF;
-    padding: 10px 20px;
-    background-color: transparent;
+/* Estilo do botão Login e Meu Perfil */
+#login-btn, #open-profile-modal {
+  font-weight: bold;
+  color: #2c6f41; /* Cor do texto dos botões */
+  background: #FFFFFF; /* Fundo branco para melhor visibilidade */
+  border: 1px solid #FFFFFF; /* Borda na mesma cor do texto */
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-left: 15px; /* Espaço entre os botões e os links do menu */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transições suaves para hover */
 }
 
-.login-btn:hover {
-    background-color: #FFFFFF;
-    color: #a8d8a1;
+#login-btn:hover, #open-profile-modal:hover {
+  background-color: #a8d8a1; /* Fundo verde escuro no hover */
+  color: #333; /* Texto escuro no hover */
 }
 
-/* Menu toggle */
+/* Menu toggle (para dispositivos móveis) */
 .navbar-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: #FFFFFF;
-    font-size: 1.5rem;
-    cursor: pointer;
+  display: none; /* Oculta o botão de menu em telas grandes */
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
+
 .navbar-toggle:hover {
-  background-color: #fff;
-  color: #333;
+  background-color: #fff; /* Fundo branco ao passar o mouse */
+  color: #333; /* Texto escuro ao passar o mouse */
 }
 
 /* Seções da página */
@@ -107,8 +112,6 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-
 
 /* Seção Introdução */
 #intro {
@@ -321,28 +324,84 @@ footer {
   font-size: 0.75rem; /* Diminuindo o tamanho da fonte */
 }
 
-/* Consultas de mídia para responsividade */
-@media (max-width: 600px) {
-  .footer-top {
-    flex-direction: row; /* Altera para row */
-    align-items: center; /* Alinha os itens ao centro */
-    justify-content: space-between; /* Espaçamento entre os itens */
-  }
+/* Estilos do Modal */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo mais escuro */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+}
 
-  .footer-text {
-    flex: 1; /* Permite que o texto ocupe espaço */
-    text-align: left; /* Alinhamento à esquerda */
-  }
+.modal-content {
+  background-color: white; /* Cor de fundo */
+  border-radius: 12px; /* Cantos arredondados */
+  padding: 30px; /* Aumenta o padding */
+  width: 800px; /* Largura maior do modal */
+  max-width: 90%; /* Limita a largura máxima em dispositivos menores */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra mais profunda */
+  text-align: left; /* Alinha o texto à esquerda */
+  position: relative; /* Para permitir o uso de posicionamento absoluto */
+  margin: auto; /* Centraliza no eixo horizontal */
+  top: 50%; /* Move o modal para baixo 50% da altura da viewport */
+  transform: translateY(-50%); /* Move o modal para cima metade da sua altura */
+}
 
-  .footer-links {
-    flex: 1; /* Permite que a lista de links ocupe espaço */
-    display: flex; /* Mantém os links em linha */
-    justify-content: center; /* Centraliza os links */
-  }
+.close-button {
+  color: #aaa; /* Cor do botão de fechar */
+  position: absolute; /* Muda para absoluto */
+  top: 15px; /* Distância do topo */
+  right: 20px; /* Distância da direita */
+  font-size: 28px; /* Aumenta o tamanho do ícone de fechar */
+  font-weight: bold;
+  cursor: pointer; /* Mão ao passar o mouse */
+}
 
-  .footer-links li {
-    margin: 0 5px; /* Espaçamento entre os links */
-  }
+.close-button:hover {
+  color: black; /* Cor ao passar o mouse */
+}
+
+.modal-content h2 {
+  margin-top: 0; /* Remove a margem superior do título */
+  font-size: 1.5rem; /* Aumenta o tamanho do título */
+  color: #2c6f41; /* Cor do título */
+}
+
+/* Estilo para os rótulos e inputs */
+.modal-content label {
+  font-weight: bold; /* Destaca os rótulos */
+  margin-top: 10px; /* Espaço acima dos rótulos */
+  color: #333; /* Cor das labels para garantir que apareçam */
+}
+
+.modal-content input, .modal-content textarea {
+  width: 100%; /* Largura total dos inputs */
+  padding: 10px; /* Espaçamento interno */
+  margin-top: 5px; /* Espaço acima dos inputs */
+  border: 1px solid #ccc; /* Borda leve */
+  border-radius: 4px; /* Cantos arredondados */
+}
+
+.modal-content button {
+  background-color: #4CAF50; /* Cor de fundo do botão */
+  color: white; /* Cor do texto */
+  border: none;
+  border-radius: 4px; /* Cantos arredondados */
+  padding: 10px 15px; /* Espaçamento interno */
+  cursor: pointer; /* Mão ao passar o mouse */
+  margin-top: 20px; /* Espaço acima do botão */
+  display: block; /* Coloca o botão em uma nova linha */
+  width: 100%; /* Largura total do botão */
+}
+
+.modal-content button:hover {
+  background-color: #45a049; /* Cor ao passar o mouse */
 }
 
 /* Responsividade */
@@ -396,15 +455,21 @@ footer {
   transition: background-color 0.3s ease;
 }
 
-.login-btn {
+/* Estilo do botão Login e Meu Perfil */
+#login-btn, #open-profile-modal  {
   font-weight: bold;
   color: #2c6f41;
-  background: #a8d8a1;
-  border: none;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF; /* Borda na mesma cor do texto */
   padding: 10px 20px;
-  background-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transições suaves para hover */
+  margin-left: 5px !important; /* Adicione essa linha para mover para a esquerda */
 }
 
+#login-btn:hover, #open-profile-modal:hover {
+  background-color: #a8d8a1; /* Fundo verde escuro no hover */
+  color: #333; /* Texto escuro no hover */
+}
 
 .navbar-menu a:hover {
   background-color: #23593C; /* Verde mais escuro */

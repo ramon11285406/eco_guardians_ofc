@@ -25,9 +25,39 @@
                 <li><a href="sejavoluntario.html">Seja um Voluntário</a></li>
                 <li><a href="doação.html">Faça uma Doação</a></li>
                 <li><a href="canal_de_denuncias.html">Canal de Denúncias</a></li>
-                <li><a href="login.html" class="login-btn">Login</a></li>
+                <li><a href="login.html" id="login-btn" class="login-btn">Login</a></li>
+                <li id="profile-button" style="display: none;">
+                    <button class="btn btn-secondary" id="open-profile-modal">Meu Perfil</button>
+                </li>
             </ul>
         </nav>
+        <!-- Modal Meu Perfil -->
+        <div id="profile-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close close-button" id="close-profile-modal">&times;</span>
+
+                <h2>Meu Perfil</h2>
+                <form id="profile-form">
+                    <label for="profile-name">Informe seu Nome:</label>
+                    <input type="text" id="profile-name" required>
+                    
+                    <label for="profile-birthdate">Data de Nascimento:</label>
+                    <input type="date" id="profile-birthdate" required>
+
+                    <label for="profile-email">E-mail:</label>
+                    <input type="email" id="profile-email" required>
+
+                    <label for="profile-phone">Telefone:</label>
+                    <input type="tel" id="profile-phone" placeholder="(xx) xxxxx-xxxx" required>
+
+                    <label for="profile-info">Outras Informações:</label>
+                    <textarea id="profile-info" rows="4" required></textarea>
+
+                    <button type="submit">Salvar Alterações</button>
+                </form>
+                <button id="logout-button">Sair da conta</button>
+            </div>
+        </div>
     </header>
 
     <!-- Seção de Introdução -->
@@ -353,6 +383,8 @@
     <script src="./scripts_js/mapa.js"></script>
     <script src="./scripts_js/index.js"></script>
     <script src="./scripts_js/botão_ongs.js"></script>
+    <script src="./scripts_js/togglemenu.js"></script>
+    <script src="./scripts_js/indexmodal.js"></script>
 </body>
 </html>
 

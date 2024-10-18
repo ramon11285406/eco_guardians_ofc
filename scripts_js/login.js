@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
+                localStorage.setItem('isLoggedIn', 'true'); // Armazena o estado de login
                 window.location.href = 'index.html';
             })
             .catch(() => {
