@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, fetchSignInMethodsForEmail} from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDHr2xdklSAhNvlnLdvYo0xEWF5788kH9o",
@@ -26,27 +25,27 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('login-email').addEventListener('input', validateFields);
     document.getElementById('login-password').addEventListener('input', validateFields);
 
-    document.getElementById('login-form').addEventListener('submit', function(event) {
+    document.getElementById('login-form').addEventListener('submit', async function(event) {
         event.preventDefault();
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
         const errorMessage = document.getElementById('login-error-message');
-    
-        signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                localStorage.setItem('isLoggedIn', 'true'); // Armazena o estado de login
-                window.location.href = 'index.html';
-            })
-            .catch(() => {
-                errorMessage.textContent = 'Email ou senha incorretos';
-                errorMessage.style.display = 'block'; // Exibe a mensagem
-                setTimeout(() => {
-                    errorMessage.textContent = '';
-                    errorMessage.style.display = 'none'; // Esconde a mensagem
-                }, 2000);
-            });
+
+        console.log("Tentativa de login com:", email, password); // Debugging
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            window.location.href = 'index.html';
+        } catch (error) {
+            console.error("Erro ao fazer login:", error); // Log de erro
+            errorMessage.textContent = 'Email ou senha incorretos';
+            errorMessage.style.display = 'block'; 
+            setTimeout(() => {
+                errorMessage.textContent = '';
+                errorMessage.style.display = 'none'; 
+            }, 2000);
+        }
     });
-    
 
     // Função para mostrar/ocultar a senha
     const passwordInputLogin = document.getElementById('login-password');

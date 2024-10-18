@@ -133,6 +133,14 @@ header.navbar .nav-buttons {
   text-align: center;
 }
 
+.success-message {
+  color: green;
+}
+
+.error-message {
+  color: red;
+}
+
 /* Consultas de mídia para responsividade */
 
 /* Para dispositivos móveis (até 600px) */

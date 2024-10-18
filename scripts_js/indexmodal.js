@@ -1,18 +1,33 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Verifica o estado de autenticação
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
+const firebaseConfig = {
+    apiKey: "AIzaSyDHr2xdklSAhNvlnLdvYo0xEWF5788kH9o",
+    authDomain: "eco-guardians-f0c75.firebaseapp.com",
+    projectId: "eco-guardians-f0c75",
+    storageBucket: "eco-guardians-f0c75.appspot.com",
+    messagingSenderId: "705601311103",
+    appId: "1:705601311103:web:6f21bf6c27d7d0d24f8a4a"
+};
+
+// Inicializa o Firebase App
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+document.addEventListener('DOMContentLoaded', function() {
     const loginButton = document.querySelector('.login-btn');
     const profileButton = document.getElementById('profile-button');
 
-    // Mostra ou esconde botões com base no estado de login
-    if (isLoggedIn === 'true') {
-        loginButton.style.display = 'none'; // Esconde o botão de login
-        profileButton.style.display = 'block'; // Mostra o botão de perfil
-    } else {
-        loginButton.style.display = 'block'; // Mostra o botão de login
-        profileButton.style.display = 'none'; // Esconde o botão de perfil
-    }
+    // Verifica o estado de autenticação
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            loginButton.style.display = 'none'; // Esconde o botão de login
+            profileButton.style.display = 'block'; // Mostra o botão de perfil
+        } else {
+            loginButton.style.display = 'block'; // Mostra o botão de login
+            profileButton.style.display = 'none'; // Esconde o botão de perfil
+        }
+    });
 
     // Abrir o modal "Meu Perfil"
     document.getElementById('open-profile-modal').addEventListener('click', function() {
@@ -28,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('profile-phone').value = '';
         document.getElementById('profile-email').value = ''; 
     }
+
     // Fechar o modal
     document.getElementById('close-profile-modal').addEventListener('click', function() {
         document.getElementById('profile-modal').style.display = 'none';
@@ -53,12 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Logout
-    document.getElementById('logout-button').addEventListener('click', function() {
-        // Lógica de logout do Firebase, se necessário
-        localStorage.removeItem('isLoggedIn'); // Remove o estado de login
-        localStorage.removeItem('userName'); // Remove o nome do usuário
-        localStorage.removeItem('userBirthdate'); // Remove a data de nascimento
-        localStorage.removeItem('userInfo'); // Remove outras informações
+    document.getElementById('logout-button').addEventListener('click', async function() {
+        await auth.signOut(); // Faz logout no Firebase
         window.location.href = 'index.html'; // Redireciona para a página inicial
     });
 });
