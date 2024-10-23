@@ -15,14 +15,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para localizar o usuário
     function onLocationFound(e) {
-        var radius = e.accuracy / 2;
-
-        L.marker(e.latlng).addTo(map)
-            .bindPopup("Você está dentro de " + radius + " metros deste ponto.")
-            .openPopup();
-
-        L.circle(e.latlng, radius).addTo(map);
+        if (e && e.coords) {
+            var radius = e.coords.accuracy / 2;
+            var latlng = L.latLng(e.coords.latitude, e.coords.longitude);
+            L.marker(latlng).addTo(map)
+                .bindPopup("Você está dentro de " + radius + " metros deste ponto.")
+                .openPopup();
+            L.circle(latlng, radius).addTo(map);
+        } else {
+            console.error("Localização não encontrada", e);
+        }
     }
+    
+    
 
     // Função para tratar erros de localização
     function onLocationError(e) {

@@ -14,6 +14,28 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+
+let inactivityTimer;
+
+function resetTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(logoutUser, 1 * 60 * 1000); // 1 minuto
+}
+
+function logoutUser() {
+    auth.signOut().then(() => {
+        window.location.href = 'index.html'; // Redireciona para a página inicial
+    }).catch((error) => {
+        console.error("Erro ao fazer logout:", error);
+    });
+}
+
+// Adiciona ouvintes de eventos para rastrear a inatividade
+document.addEventListener('mousemove', resetTimer);
+document.addEventListener('keydown', resetTimer);
+document.addEventListener('click', resetTimer);
+document.addEventListener('scroll', resetTimer);
+
 document.addEventListener('DOMContentLoaded', function() {
     function validateFields() {
         const email = document.getElementById('login-email').value;
@@ -35,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
+            resetTimer(); // Inicia o timer após o login
             window.location.href = 'index.html';
         } catch (error) {
             console.error("Erro ao fazer login:", error); // Log de erro

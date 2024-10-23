@@ -14,6 +14,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+let inactivityTimer; // Variável do timer
+
+function resetTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(logoutUser, 1 * 60 * 1000); // 1 minuto
+}
+
+function logoutUser() {
+    auth.signOut().then(() => {
+        window.location.href = 'index.html'; // Redireciona para a página inicial
+    }).catch((error) => {
+        console.error("Erro ao fazer logout:", error);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const loginButton = document.querySelector('.login-btn');
     const profileButton = document.getElementById('profile-button');
@@ -23,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (user) {
             loginButton.style.display = 'none'; // Esconde o botão de login
             profileButton.style.display = 'block'; // Mostra o botão de perfil
+            resetTimer(); // Inicia o timer quando o usuário está autenticado
         } else {
             loginButton.style.display = 'block'; // Mostra o botão de login
             profileButton.style.display = 'none'; // Esconde o botão de perfil
@@ -68,9 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
         clearInputs(); // Limpa os inputs após salvar
     });
 
-    // Logout
-    document.getElementById('logout-button').addEventListener('click', async function() {
-        await auth.signOut(); // Faz logout no Firebase
+     // Logout
+     document.getElementById('logout-button').addEventListener('click', async function() {
+        clearTimeout(inactivityTimer); // Limpa o timer antes de deslogar
+        await auth.signOut();
         window.location.href = 'index.html'; // Redireciona para a página inicial
     });
+
+    // Adiciona ouvintes de eventos para rastrear a inatividade
+    document.addEventListener('mousemove', resetTimer);
+    document.addEventListener('keydown', resetTimer);
+    document.addEventListener('click', resetTimer);
+    document.addEventListener('scroll', resetTimer);
 });
