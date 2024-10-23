@@ -10,10 +10,10 @@ body {
     min-height: 100vh;
     justify-content: center; /* Centraliza o conteúdo verticalmente */
     align-items: center; /* Centraliza o conteúdo horizontalmente */
-  }
-  
-  /* Estilização do cabeçalho */
-  header.navbar {
+}
+
+/* Estilização do cabeçalho */
+header.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,35 +29,14 @@ body {
     left: 0;
     width: 100%; /* Ocupa a largura total da página */
     z-index: 1000; /* Garante que o cabeçalho fique acima do conteúdo */
-  }
-  
-  .navbar-brand {
+}
+
+.navbar-brand {
     font-size: 1.6rem;
     font-weight: bold;
     color: #FFFFFF;
     text-decoration: none;
-  }
-  
-  /* Estilo do menu para dispositivos móveis */
-  header.navbar .nav-buttons {
-    display: flex;
-  }
-  
-  /* Estilo do botão Login */
-  .btn-paginainicial {
-    margin-left: 15px;
-    color: #FFFFFF;
-    background: #2c6f41;
-    border: 1px solid #FFFFFF;
-    border-radius: 8px;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 1rem;
-  }
-  
-  .btn-paginainicial:hover {
-    background-color: #23593C;
-  }
+}
 
 /* Seção de Administração */
 #admin {
@@ -66,6 +45,32 @@ body {
     background-color: #FFFFFF; 
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilização da tabela */
+.table {
+    table-layout: fixed; /* Faz a tabela manter uma largura fixa */
+    width: 100%; /* Ocupa a largura total do contêiner */
+}
+
+.table th, .table td {
+    word-wrap: break-word; /* Permite que palavras longas quebrem */
+    overflow-wrap: break-word; /* Para suportar navegadores que não implementam o anterior */
+    padding: 10px; /* Espaçamento interno nas células */
+}
+
+.table td {
+    min-height: 50px; /* Define uma altura mínima para as células */
+}
+
+.table tr {
+    line-height: 1.5; /* Aumenta a altura da linha */
+}
+
+/* Contêiner rolável para a tabela */
+.table-responsive {
+    overflow-x: auto; /* Habilita rolagem horizontal se necessário */
+    margin-top: 20px; /* Espaçamento acima da tabela */
 }
 
 /* Estilização dos botões */
@@ -91,6 +96,17 @@ body {
 
 .btn-secondary:hover {
     background-color: #5a6268; 
+}
+
+
+.nav-button {
+    margin-right: 20px; /* Espaço entre os botões */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.nav-button:hover {
+    background-color: #2F6D4F; /* Cor de fundo ao passar o mouse */
+    color: #FFFFFF;
 }
 
 /* Modal */
