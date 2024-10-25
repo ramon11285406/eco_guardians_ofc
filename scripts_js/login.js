@@ -19,7 +19,7 @@ let inactivityTimer;
 
 function resetTimer() {
     clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(logoutUser, 1 * 60 * 1000); // 1 minuto
+    inactivityTimer = setTimeout(logoutUser, 1 * 60 * 15000); // 15 minutos
 }
 
 function logoutUser() {
