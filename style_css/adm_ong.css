@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    justify-content: flex-start; /* Alinha o conteúdo no topo */
     align-items: center; /* Centraliza o conteúdo horizontalmente */
 }
 
@@ -20,15 +20,14 @@ header.navbar {
     padding: 5px 20px;
     background: #2c6f41; /* Cor de fundo verde escuro */
     color: #fff;
-    margin: 0 auto; /* Centraliza horizontalmente */
     border: 1px solid #D1E0D5;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: fixed; /* Fixado no topo */
-    top: 0; /* Fica no topo da página */
+    top: 0; 
     left: 0;
     width: 100%; /* Ocupa a largura total da página */
-    z-index: 1000; /* Garante que o cabeçalho fique acima do conteúdo */
+    z-index: 1000; /* Fixa acima do conteúdo */
 }
 
 .navbar-brand {
@@ -38,13 +37,21 @@ header.navbar {
     text-decoration: none;
 }
 
+/* Menu de Navegação */
+nav {
+    margin-top: 80px; /* Espaçamento abaixo do cabeçalho fixo */
+}
+
 /* Seção de Administração */
-#admin {
-    max-width: 800px; 
+#admin, #create-post, #received-reports {
+    max-width: 1200px; /* Aumenta a largura máxima para desktop */
     padding: 20px;
     background-color: #FFFFFF; 
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Espaço acima da seção */
+    flex: 1; /* Permite que a seção cresça e ocupe o espaço disponível */
+    transition: max-height 0.3s ease; /* Animação para expandir */
 }
 
 /* Estilização da tabela */
@@ -55,8 +62,7 @@ header.navbar {
 
 .table th, .table td {
     word-wrap: break-word; /* Permite que palavras longas quebrem */
-    overflow-wrap: break-word; /* Para suportar navegadores que não implementam o anterior */
-    padding: 10px; /* Espaçamento interno nas células */
+    padding: 2px; /* Espaçamento interno nas células */
 }
 
 .table td {
@@ -74,79 +80,92 @@ header.navbar {
 }
 
 /* Estilização dos botões */
-.btn-primary {
-    background-color: #23593C; 
+.btn-primary, .btn-secondary {
     border: none;
     color: #FFFFFF;
-    border-radius: 5px;
-    padding: 10px 20px;
+    border-radius: 8px; /* Aumenta o raio de borda para um visual mais suave */
+    padding: 10px 20px; /* Ajusta o padding para um botão mais compacto */
+    width: auto; /* Muda para auto para que a largura se ajuste ao conteúdo */
+    max-width: 300px; /* Define uma largura máxima para os botões */
+    margin-bottom: 20px; /* Aumenta o espaçamento entre os botões */
+    font-size: 18px; /* Aumenta o tamanho da fonte para melhor legibilidade */
+    transition: background-color 0.3s, transform 0.2s; /* Suaviza a transição */
+    text-align: center; /* Centraliza o texto dentro do botão */
+}
+
+/* Estilização do Menu Lateral */
+.nav-button {
+    display: block; /* Faz os botões ocuparem toda a largura */
+    text-align: center; /* Alinha o texto ao centro */
+    padding: 10px 20px; /* Ajusta o espaçamento interno */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    border-radius: 8px; /* Borda arredondada */
+    transition: background-color 0.3s, transform 0.3s; /* Animações suaves */
+    max-width: 300px; /* Define uma largura máxima para os botões do menu lateral */
+    margin: 0 auto; /* Centraliza os botões no menu lateral */
+}
+
+
+.btn-primary {
+    background-color: #23593C; 
 }
 
 .btn-primary:hover {
     background-color: #2F6D4F; 
+    transform: translateY(-2px); /* Efeito de elevação no hover */
 }
 
 .btn-secondary {
     background-color: #6c757d; 
-    border: none;
-    color: #FFFFFF;
-    border-radius: 5px;
-    padding: 10px 20px; 
 }
 
 .btn-secondary:hover {
     background-color: #5a6268; 
+    transform: translateY(-2px); /* Efeito de elevação no hover */
 }
 
+/* Estilização do Menu Lateral */
+.sidebar {
+    position: fixed; /* Fixa o menu à esquerda */
+    top: 60px; /* Abaixo do cabeçalho */
+    left: 0;
+    width: 240px; /* Largura do menu lateral */
+    background-color: #ffffff; /* Cor de fundo */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* Espaçamento interno */
+    z-index: 1000; /* Fixa acima do conteúdo */
+}
 
+/* Estilização dos botões da sidebar */
 .nav-button {
-    margin-right: 20px; /* Espaço entre os botões */
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    display: block; /* Faz os botões ocuparem toda a largura */
+    text-align: center; /* Alinha o texto ao centro */
+    padding: 12px; /* Ajusta o espaçamento interno para menor */
+    font-size: 16px; /* Tamanho da fonte */
+    border-radius: 8px; /* Borda arredondada */
+    transition: background-color 0.3s, transform 0.3s; /* Animações suaves */
+    width: 100%; /* Faz os botões ocuparem toda a largura disponível */
+    max-width: 220px; /* Define uma largura máxima para os botões */
+    margin: 10px auto; /* Centraliza os botões e dá espaço entre eles */
 }
+
+/* Efeitos de Hover */
 .nav-button:hover {
     background-color: #2F6D4F; /* Cor de fundo ao passar o mouse */
-    color: #FFFFFF;
-}
-
-/* Modal */
-.modal {
-    display: none; 
-    position: fixed;
-    z-index: 1001;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 8px;
-}
-
-.close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+    color: #FFFFFF; /* Cor do texto ao passar o mouse */
+    transform: scale(1.05); /* Aumenta ligeiramente o tamanho do botão */
 }
 
 /* Responsividade */
 @media (max-width: 600px) {
+    .sidebar {
+        position: absolute; /* Mantém a sidebar sobre as seções */
+        width: 100%; /* Largura total em telas pequenas */
+        top: 60px; /* Abaixo do cabeçalho */
+        left: 0;
+        z-index: 1000; /* Fixa acima do conteúdo */
+    }
+    
     header.navbar {
         flex-direction: column;
         align-items: flex-start;
@@ -158,6 +177,41 @@ header.navbar {
 
     #admin {
         max-width: 100%; 
-        margin: 20px;
+        margin: 120px 0 20px; /* Espaço acima para a seção pai */
+        padding: 15px; /* Aumenta o padding para melhorar o espaço interno */
+        overflow: hidden; /* Oculta conteúdo excedente */
+    }
+
+    #create-post, #received-reports {
+        max-width: 100%; 
+        margin: 20px 0; /* Espaço abaixo da seção de criar publicação */
+        padding: 15px; /* Aumenta o padding para melhorar o espaço interno */
+        overflow: hidden; /* Oculta conteúdo excedente */
+    }
+
+    /* Para garantir que o título apareça corretamente */
+    h2.text-center {
+        display: block; /* Garante que o título fique visível */
+        text-align: center; /* Centraliza o texto */
+        margin-top: 20px; /* Distância do topo */
+    }
+
+    .nav-button {
+        padding: 8px; /* Ajusta o padding para botões em telas pequenas */
+        font-size: 14px; /* Reduz o tamanho da fonte em telas pequenas */
+        max-width: 90%; /* Permite que os botões ocupem mais espaço em telas pequenas */
+        margin-bottom: 10px; /* Espaço entre os botões */
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 10px 20px; /* Diminui o padding em telas pequenas */
+        font-size: 16px; /* Ajusta o tamanho da fonte para melhor legibilidade */
+        max-width: 90%; /* Ajusta a largura máxima dos botões */
+        margin-bottom: 15px; /* Adiciona espaço abaixo dos botões */
     }
 }
+
+
+
+
+
