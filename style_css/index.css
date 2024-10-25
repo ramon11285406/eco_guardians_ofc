@@ -404,6 +404,43 @@ footer {
   background-color: #45a049; /* Cor ao passar o mouse */
 }
 
+/* Estilos do Modal para mensagens de nãoo logado e sem permissão*/
+#modal-content {
+  background-color: white; /* Cor de fundo */
+  border-radius: 12px; /* Cantos arredondados */
+  padding: 30px; /* Aumenta o padding */
+  width: 400px; /* Largura maior do modal */
+  max-width: 90%; /* Limita a largura máxima em dispositivos menores */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra mais profunda */
+  text-align: left; /* Alinha o texto à esquerda */
+  position: relative; /* Para permitir o uso de posicionamento absoluto */
+  margin: auto; /* Centraliza no eixo horizontal */
+  top: 50%; /* Move o modal para baixo 50% da altura da viewport */
+  transform: translateY(-50%); /* Move o modal para cima metade da sua altura */
+}
+
+#nao-logado, #sem-permissao {
+  text-align: center; /* Centraliza o título */
+  color: #c0392b; /* Cor vermelha para o alerta */
+  font-size: 24px; /* Tamanho da fonte */
+  margin-top: 25px; /* Espaço acima do título */
+}
+
+#not-logged-message, #no-permission-message {
+  text-align: center; /* Centraliza o texto */
+  color: #e67e22; /* Cor laranja para a mensagem */
+  font-size: 18px; /* Tamanho da fonte */
+  margin-top: 15px; /* Espaço acima da mensagem */
+}
+
+#close-not-logged-modal, #close-not-permission-modal {
+  position: absolute; /* Posiciona o botão de fechar */
+  top: 10px; /* Distância do topo do modal */
+  right: 20px; /* Distância da borda direita */
+  font-size: 24px; /* Tamanho do X */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+
 /* Responsividade */
 @media (max-width: 1135px) {
  /* Estilo do menu para dispositivos móveis */

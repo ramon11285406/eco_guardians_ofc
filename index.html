@@ -20,7 +20,7 @@
         </button>
         <nav class="navbar-menu" id="navbar-menu">
             <ul>
-                <li><a href="login_ong.html">ONGs</a></li>
+                <li><a id="access-ongs-button" href="adm_ong.html">ONGs</a></li>
                 <li><a href="contato.html">Contatos</a></li>
                 <li><a href="sejavoluntario.html">Seja um Voluntário</a></li>
                 <li><a href="doação.html">Faça uma Doação</a></li>
@@ -56,6 +56,23 @@
                     <button type="submit">Salvar Alterações</button>
                 </form>
                 <button id="logout-button">Sair da conta</button>
+            </div>
+        </div>
+        <!-- Modal Não Logado -->
+        <div id="not-logged-modal" class="modal" style="display: none;">
+            <div id="modal-content">
+                <span class="close close-button" id="close-not-logged-modal">&times;</span>
+                <h2 id="nao-logado">Acesso Negado</h2>
+                <p id="not-logged-message">Você não está logado, Faça login no sistema.</p>
+            </div>
+        </div>
+
+        <!-- Modal Sem Permissão -->
+        <div id="no-permission-modal" class="modal" style="display: none;">
+            <div id="modal-content">
+                <span class="close close-button" id="close-no-permission-modal">&times;</span>
+                <h2 id="sem-permissao">Acesso Negado</h2>
+                <p id="no-permission-message">Você não tem permissão para acessar esta página.</p>
             </div>
         </div>
     </header>
@@ -398,8 +415,9 @@
     <script src="./scripts_js/botão_ongs.js"></script>
     <script src="./scripts_js/togglemenu.js"></script>
     <script type="module" src="./scripts_js/indexmodal.js"></script>
-    <script src="/scripts_js/firebaseinit.js"></script>
-    <script src="/scripts_js/ongsparceira.js"></script>
+    <script src="./scripts_js/firebaseinit.js"></script>
+    <script src="./scripts_js/ongsparceira.js"></script>
+    <script type="module" src="./scripts_js/ongs_autenticadas.js"></script>
 </body>
 </html>
 
