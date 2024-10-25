@@ -110,6 +110,7 @@ label {
 /* Estilização dos links */
 .forgot-password, .register, .login-link {
   margin-top: 15px;
+  
 }
 
 .forgot-password a, .register a, .login-link a {
