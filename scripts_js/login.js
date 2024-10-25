@@ -89,16 +89,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Cadastro de usuário
     const passwordInputRegister = document.getElementById('register-password'); // Renomeado
+    const confirmpasswordInputRegister = document.getElementById('repeat-password');
     document.getElementById('register-form').addEventListener('submit', function(event) {
         event.preventDefault();
 
         const email = document.getElementById('register-email').value;
         const password = passwordInputRegister.value; // Usando a nova variável
+        const repeatpassword = confirmpasswordInputRegister.value;
         const errorMessage = document.getElementById('register-error-message');
 
         // Verifica se a senha tem pelo menos 6 caracteres
         if (password.length < 6) {
             errorMessage.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+            errorMessage.style.color = 'red';
+            setTimeout(() => {
+                errorMessage.textContent = '';
+            }, 2000);
+            return; // Impede o envio do formulário
+        }
+        else if (password !== repeatpassword){
+            errorMessage.textContent = "As senhas não conferem";
             errorMessage.style.color = 'red';
             setTimeout(() => {
                 errorMessage.textContent = '';
