@@ -103,7 +103,7 @@ body {
 }
 
 /* Seções da página */
-#intro, #informacoes, #posts, #faq, #mapa, #ongs-parceiras, #recomendacoes, #carousel-section {
+#intro, #informacoes, #faq, #mapa, #ongs-parceiras, #recomendacoes, #carousel-section {
   width: 100%; /* Largura total */
   max-width: 1300px; /* Largura máxima padrão */
   margin: 70px auto 20px auto; /* Espaçamento centralizado */ /* Margem superior de 20px, centralização automática */
@@ -194,11 +194,20 @@ body {
   text-decoration: underline;
 }
 
-/* Posts */
+/* Seção geral dos posts */
 #posts {
-  background-color: #FFFFFF; /* Fundo branco para posts */
+  width: 100%; /* Largura total */
+  max-width: 1300px; /* Largura máxima */
+  margin: 70px auto 20px auto; /* Espaçamento superior de 70px e inferior de 20px, centralizado */
+  padding: 20px;
+  background-color: #FFFFFF; /* Fundo branco */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  overflow-y: scroll; /* Rolagem lateral ao longo do eixo Y */
+  height: 500px; /* Defina uma altura fixa para permitir a rolagem vertical */
 }
 
+/* Estilo de cada post */
 .post {
   background-color: #F9F9F9; /* Fundo cinza claro para os posts */
   padding: 20px;
@@ -206,7 +215,123 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px; /* Espaçamento inferior */
+  flex-shrink: 0; /* Evita que o post encolha */
+  width: 100%; /* Cada post ocupará toda a largura disponível */
 }
+
+/* Estilo da imagem */
+.media-image {
+  width: 80%;  /* Reduzindo o tamanho da imagem para 80% da largura disponível */
+  max-width: 500px;  /* Largura máxima da imagem */
+  height: auto; /* Mantém a proporção da imagem */
+  margin: 0 auto 15px auto; /* Centraliza a imagem */
+  display: block;  /* Garante que a imagem seja exibida como um bloco */
+  border-radius: 8px;  /* Bordas arredondadas */
+}
+
+/* Estilo dos vídeos (iframe) */
+.media-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;  /* Proporção de 16:9 para o vídeo */
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.media-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Contêiner de comentários */
+.comments {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container dos botões de Curtir e Comentar */
+.comment-buttons {
+  display: flex;                  /* Flexbox para alinhar os botões horizontalmente */
+  align-items: center;            /* Alinha os botões na mesma altura vertical */
+  gap: 10px;                      /* Espaço entre os botões */
+  margin-top: 10px;               /* Espaçamento entre o campo de comentário e os botões */
+}
+
+/* Estilo do contador de curtidas */
+.likes-count {
+  font-size: 14px;                /* Tamanho do texto */
+  color: #6c757d;                 /* Cor do texto (cinza claro) */
+  margin-left: 5px;               /* Menor espaço entre o número e o botão de curtir */
+  display: inline-block;          /* Exibe o texto na mesma linha */
+  align-self: center;             /* Garante que o texto fique alinhado verticalmente com os botões */
+  font-weight: bold;              /* Deixa o texto mais destacado */
+}
+
+/* Estilo para o texto 'Legal' dentro do botão de curtir */
+.like-btn .like-text {
+  font-size: 14px;           /* Tamanho do texto */
+  color: #007bff;            /* Cor do texto */
+  font-weight: bold;         /* Deixa o texto mais destacado */
+  margin: 0;                 /* Remove qualquer margem extra */
+  padding: 0;                /* Remove o padding */
+  text-align: center;        /* Centraliza o texto dentro do botão */
+}
+
+
+/* Hover do botão 'Curtir' */
+.like-btn:hover {
+  background-color: #e2e6ea;      /* Altera o fundo ao passar o mouse */
+  border-color: #007bff;          /* Altera a borda ao passar o mouse */
+}
+
+/* Estilo do botão 'Comentar' */
+.comment-btn {
+  background-color: #007bff;      /* Cor de fundo para o botão de comentar */
+  color: white;                   /* Cor do texto do botão de comentar */
+  border: none;                   /* Sem borda no botão de comentar */
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Hover do botão 'Comentar' */
+.comment-btn:hover {
+  background-color: #0056b3;      /* Cor ao passar o mouse */
+  box-shadow: 0 2px 8px rgba(0, 86, 179, 0.3);
+}
+
+
+
+
+
+
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  #posts {
+    height: 400px; /* Ajuste da altura para telas menores */
+  }
+
+  .post {
+    margin-bottom: 15px; /* Menor espaçamento entre posts em telas pequenas */
+  }
+
+  .media-image {
+    max-width: 100%; /* Imagem ocupa toda a largura disponível em telas pequenas */
+  }
+
+  .media-container {
+    padding-bottom: 75%;  /* Proporção de 4:3 para dispositivos menores */
+  }
+}
+
+
+
+
 
 /* FAQ */
 #faq {
