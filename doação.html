@@ -24,10 +24,15 @@
             <label for="categoria" class="form-label">Escolha a Categoria da ONG:</label>
             <select id="categoria" class="form-select" onchange="filtrarOnGsPorCategoria()">
                 <option value="">Selecione uma Categoria</option>
-                <option value="saude">Saúde</option>
-                <option value="educacao">Educação</option>
-                <option value="meio_ambiente">Meio Ambiente</option>
-                <option value="animais">Animais</option>
+                <option value="desmatamento">Desmatamento Ilegal</option>
+                <option value="poluicao">Poluição</option>
+                <option value="caca_pesca">Caça e Pesca Ilegal</option>
+                <option value="construcoes">Construções Irregulares</option>
+                <option value="contrabando_animais">Contrabando de Animais Silvestres</option>
+                <option value="degradacao_ecossistemas">Degradação de Ecossistemas</option>
+                <option value="descarte_residuos">Descarte Irregular de Resíduos</option>
+                <option value="agrotoxicos">Uso de Agrotóxicos Ilegais</option>
+                <option value="exploracao_mineral">Exploração Mineral Ilegal</option>
             </select>
         </div>
 
@@ -56,47 +61,85 @@
     <script>
         // Dados das ONGs
         const ongs = {
-            saude: [
+            desmatamento: [
                 {
-                    nome: "Hospitais para Todos",
+                    nome: "Floresta Viva",
                     chavePix: "12345678901@pix.com",
-                    contaBancaria: "Banco Exemplo, Agência 1234, Conta 567890-1",
-                    localizacao: "São Paulo, SP",
-                    resumo: "Hospitais para Todos oferece serviços médicos gratuitos a comunidades carentes."
-                },
-                {
-                    nome: "Coração Solidário",
-                    chavePix: "98765432101@pix.com",
-                    contaBancaria: "Banco Solidariedade, Agência 4321, Conta 098765-1",
-                    localizacao: "Rio de Janeiro, RJ",
-                    resumo: "A ONG Coração Solidário realiza cirurgias cardíacas gratuitas para pessoas de baixa renda."
+                    contaBancaria: "Banco Verde, Agência 2345, Conta 987654-3",
+                    localizacao: "Acre, Brasil",
+                    resumo: "A ONG Floresta Viva combate o desmatamento ilegal e promove o reflorestamento na Amazônia."
                 }
             ],
-            educacao: [
+            poluicao: [
                 {
-                    nome: "Ensino para Todos",
+                    nome: "Ar Limpo",
                     chavePix: "32165498700@pix.com",
-                    contaBancaria: "Banco Exemplo, Agência 5678, Conta 123456-7",
-                    localizacao: "Belo Horizonte, MG",
-                    resumo: "Oferece cursos e materiais educativos gratuitos para crianças de regiões carentes."
+                    contaBancaria: "Banco Limpeza, Agência 1234, Conta 567890-1",
+                    localizacao: "São Paulo, SP",
+                    resumo: "Ar Limpo atua na conscientização e redução da poluição do ar em grandes cidades."
                 }
             ],
-            meio_ambiente: [
+            caca_pesca: [
                 {
-                    nome: "Verde Para Todos",
+                    nome: "Vida Selvagem",
                     chavePix: "74125896300@pix.com",
-                    contaBancaria: "Banco Verde, Agência 8765, Conta 543210-9",
-                    localizacao: "Curitiba, PR",
-                    resumo: "Trabalha com projetos de reflorestamento e conservação ambiental."
+                    contaBancaria: "Banco Wild, Agência 6789, Conta 234567-8",
+                    localizacao: "Pantanal, MS",
+                    resumo: "A ONG Vida Selvagem luta contra a caça e pesca ilegal de espécies ameaçadas."
                 }
             ],
-            animais: [
+            construcoes: [
                 {
-                    nome: "Amigos Peludos",
+                    nome: "Terras Protegidas",
                     chavePix: "15935746800@pix.com",
-                    contaBancaria: "Banco Animal, Agência 1357, Conta 246813-2",
-                    localizacao: "Porto Alegre, RS",
-                    resumo: "Resgata e cuida de animais abandonados, oferecendo abrigo e atendimento veterinário."
+                    contaBancaria: "Banco Solidário, Agência 2468, Conta 135792-0",
+                    localizacao: "Rio de Janeiro, RJ",
+                    resumo: "Terras Protegidas trabalha contra as construções irregulares em áreas de preservação ambiental."
+                }
+            ],
+            contrabando_animais: [
+                {
+                    nome: "Proteção Animal",
+                    chavePix: "98765432101@pix.com",
+                    contaBancaria: "Banco Verde, Agência 1357, Conta 246813-2",
+                    localizacao: "Curitiba, PR",
+                    resumo: "A ONG Proteção Animal combate o contrabando de animais silvestres e promove sua reabilitação."
+                }
+            ],
+            degradacao_ecossistemas: [
+                {
+                    nome: "Ecossistemas em Risco",
+                    chavePix: "85296374100@pix.com",
+                    contaBancaria: "Banco ProNatureza, Agência 1597, Conta 357924-1",
+                    localizacao: "Manaus, AM",
+                    resumo: "Ecossistemas em Risco foca na restauração de ecossistemas degradados pela ação humana."
+                }
+            ],
+            descarte_residuos: [
+                {
+                    nome: "Mundo Limpo",
+                    chavePix: "36925814700@pix.com",
+                    contaBancaria: "Banco Limpeza, Agência 7531, Conta 852963-7",
+                    localizacao: "Belo Horizonte, MG",
+                    resumo: "A ONG Mundo Limpo educa e combate o descarte irregular de resíduos em áreas urbanas."
+                }
+            ],
+            agrotoxicos: [
+                {
+                    nome: "Agricultura Sustentável",
+                    chavePix: "45678901234@pix.com",
+                    contaBancaria: "Banco Agro, Agência 2468, Conta 135792-3",
+                    localizacao: "Ribeirão Preto, SP",
+                    resumo: "Agricultura Sustentável promove a utilização de métodos agrícolas sem o uso de agrotóxicos ilegais."
+                }
+            ],
+            exploracao_mineral: [
+                {
+                    nome: "Minerais em Perigo",
+                    chavePix: "15975345600@pix.com",
+                    contaBancaria: "Banco Minerar, Agência 4567, Conta 987654-0",
+                    localizacao: "Minas Gerais, MG",
+                    resumo: "A ONG Minerais em Perigo luta contra a exploração mineral ilegal em regiões sensíveis."
                 }
             ]
         };
@@ -134,37 +177,39 @@
         function filtrarOnGsPorCategoria() {
             const categoriaSelecionada = document.getElementById("categoria").value;
             const ongsContainer = document.getElementById("ongs-container");
-            ongsContainer.innerHTML = ""; // Limpar o conteúdo anterior
+            ongsContainer.innerHTML = ""; // Limpar o conteúdo
 
-            if (categoriaSelecionada && ongs[categoriaSelecionada]) {
-                ongs[categoriaSelecionada].forEach(ong => {
-                    const ongCard = document.createElement("div");
-                    ongCard.classList.add("col-md-4", "mb-4");
-
-                    ongCard.innerHTML = `
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">${ong.nome}</h4>
-                                <p><strong>Localização:</strong> ${ong.localizacao}</p>
-                                <p><strong>Resumo:</strong> ${ong.resumo}</p>
-                                <h5 class="mt-3">Chave Pix:</h5>
-                                <p>${ong.chavePix}</p>
-                                <h5>Conta Bancária:</h5>
-                                <p>${ong.contaBancaria}</p>
-                            </div>
-                        </div>
-                    `;
-                    ongsContainer.appendChild(ongCard);
-                });
-            } else {
-                ongsContainer.innerHTML = "<p class='text-center'>Selecione uma categoria para visualizar as ONGs.</p>";
+            // Se não houver categoria selecionada, exibe todas as ONGs
+            if (!categoriaSelecionada) {
+                exibirTodasAsOnGs();
+                return;
             }
+
+            // Exibe ONGs da categoria selecionada
+            ongs[categoriaSelecionada].forEach(ong => {
+                const ongCard = document.createElement("div");
+                ongCard.classList.add("col-md-4", "mb-4");
+
+                ongCard.innerHTML = `
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">${ong.nome}</h4>
+                            <p><strong>Localização:</strong> ${ong.localizacao}</p>
+                            <p><strong>Resumo:</strong> ${ong.resumo}</p>
+                            <h5 class="mt-3">Chave Pix:</h5>
+                            <p>${ong.chavePix}</p>
+                            <h5>Conta Bancária:</h5>
+                            <p>${ong.contaBancaria}</p>
+                        </div>
+                    </div>
+                `;
+                ongsContainer.appendChild(ongCard);
+            });
         }
 
-        // Exibir todas as ONGs quando a página for carregada
+        // Exibir todas as ONGs ao carregar a página
         window.onload = exibirTodasAsOnGs;
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-8Y4V9vv0PIV74vWh19kmPljoq75HkLfgmj/npFmlfhQ0XFOo6Rt/D8M3jUJlhYeg" crossorigin="anonymous"></script>
 </body>
 </html>
