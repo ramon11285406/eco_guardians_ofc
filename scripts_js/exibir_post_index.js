@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
 import { getFirestore, collection, getDocs, query, orderBy, doc, getDoc, updateDoc, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -18,6 +18,21 @@ const app = initializeApp(firebaseConfig);
 // Referências ao Firestore e Auth
 const db = getFirestore(app);
 const auth = getAuth(app);
+
+// Variável para armazenar o usuário logado
+let currentUser = null;
+
+// Monitorando o estado de autenticação
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // O usuário está autenticado
+        currentUser = user;
+        console.log("Usuário autenticado:", currentUser.displayName || currentUser.email);
+    } else {
+        // Usuário não autenticado
+        currentUser = null;
+    }
+});
 
 // Função para carregar as publicações
 async function loadPosts() {
@@ -71,7 +86,6 @@ async function loadPosts() {
             </div>
         `;
 
-
         // Adiciona a publicação ao container
         postsContainer.appendChild(postDiv);
 
@@ -94,16 +108,24 @@ async function loadComments(postId) {
 
     querySnapshot.forEach((doc) => {
         const commentData = doc.data();
+
+        // Log para verificar o conteúdo do comentário
+        console.log(commentData);  // Verifique se o campo 'userName' está sendo armazenado corretamente
+
+        // Verifica se 'userName' existe. Se não, usa o e-mail como fallback
+        const userName = commentData.userName || commentData.email?.split('@')[0] || "Usuário Anônimo";
+
         const commentDiv = document.createElement('div');
         commentDiv.classList.add('comment', 'mb-2');
 
-        const userName = "Usuário"; // Aqui você pode buscar o nome do usuário, se necessário.
-        const content = commentData.content;
-        commentDiv.innerHTML = `<strong>${userName}:</strong> ${content}`;
+        // Exibe o nome (ou e-mail) e o conteúdo do comentário
+        commentDiv.innerHTML = `<strong>${userName}:</strong> ${commentData.content}`;
         
         commentsContainer.appendChild(commentDiv);
     });
 }
+
+
 
 // Função para curtir uma publicação
 async function likePost(postId) {
@@ -124,8 +146,6 @@ async function likePost(postId) {
             const updatedLikes = [...postData.likes, currentUser.uid];
             await updateDoc(postRef, { likes: updatedLikes });
             alert('Você curtiu a publicação!');
-
-            // Atualizar o número de curtidas na interface
             updateLikesCount(postId);
         } else {
             alert('Você já curtiu esta publicação!');
@@ -141,16 +161,16 @@ async function updateLikesCount(postId) {
     if (postDoc.exists()) {
         const postData = postDoc.data();
         const likesCount = postData.likes ? postData.likes.length : 0;
-        
-        // Encontrar o elemento onde o número de curtidas está sendo exibido
-        const likesCountElement = document.querySelector(`[data-post-id="${postId}"]`).parentNode.querySelector('.likes-count');
+
+        // Atualiza o número de curtidas na interface
+        const likesCountElement = document.querySelector(`[data-post-id="${postId}"]`).parentNode.querySelector('.like-count');
         if (likesCountElement) {
             likesCountElement.textContent = `${likesCount} curtidas`;
         }
     }
 }
 
-// Função para adicionar um comentário
+// Função para cadastrar comentarios
 async function addComment(postId) {
     const commentContent = document.getElementById(`comment-input-${postId}`).value;
     if (!commentContent) return;
@@ -161,22 +181,30 @@ async function addComment(postId) {
         return;
     }
 
+    // Verifica se o nome de exibição (displayName) está disponível
+    // Se não estiver, pega o nome de usuário (parte antes do @ do e-mail)
+    const userName = currentUser.displayName || currentUser.email.split('@')[0];
+
     const comment = {
         uid: currentUser.uid,
         content: commentContent,
         createdAt: Timestamp.now(),
+        userName: userName,  // Salvando o nome do usuário ou e-mail
+        email: currentUser.email  // Se quiser salvar o e-mail também
     };
 
+    // Salva o comentário no Firestore
     await addDoc(collection(db, `posts/${postId}/comments`), comment);
-    
-    // Recarregar os comentários após adicionar um novo
-    document.getElementById(`comment-input-${postId}`).value = ''; // Limpar campo de comentário
-    loadComments(postId); // Carregar novamente os comentários
+
+    // Limpar o campo de comentário e recarregar a lista de comentários
+    document.getElementById(`comment-input-${postId}`).value = '';
+    loadComments(postId); // Recarrega os comentários
 }
+
+
 
 // Função para atribuir os eventos de curtir e comentar
 function assignEventListeners() {
-    // Atribuindo evento de curtir
     const likeButtons = document.querySelectorAll('.like-btn');
     likeButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -185,7 +213,6 @@ function assignEventListeners() {
         });
     });
 
-    // Atribuindo evento de comentar
     const commentButtons = document.querySelectorAll('.comment-btn');
     commentButtons.forEach(button => {
         button.addEventListener('click', () => {

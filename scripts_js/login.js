@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDHr2xdklSAhNvlnLdvYo0xEWF5788kH9o",
@@ -13,7 +13,6 @@ const firebaseConfig = {
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
 
 let inactivityTimer;
 
@@ -36,7 +35,7 @@ document.addEventListener('keydown', resetTimer);
 document.addEventListener('click', resetTimer);
 document.addEventListener('scroll', resetTimer);
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     function validateFields() {
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
@@ -47,7 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('login-email').addEventListener('input', validateFields);
     document.getElementById('login-password').addEventListener('input', validateFields);
 
-    document.getElementById('login-form').addEventListener('submit', async function(event) {
+    // Login
+    document.getElementById('login-form').addEventListener('submit', async function (event) {
         event.preventDefault();
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
@@ -70,154 +70,176 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Função para mostrar/ocultar a senha
+    // Mostrar/ocultar a senha
     const passwordInputLogin = document.getElementById('login-password');
     const eyeIcon = document.getElementById('toggle-password');
-
-    eyeIcon.onclick = function() {
+    eyeIcon.onclick = function () {
         const type = passwordInputLogin.type === 'password' ? 'text' : 'password';
         passwordInputLogin.type = type;
     };
 
-    passwordInputLogin.addEventListener('focus', function() {
+    passwordInputLogin.addEventListener('focus', function () {
         eyeIcon.style.display = 'inline'; // Exibe o ícone
     });
 
-    passwordInputLogin.addEventListener('blur', function() {
+    passwordInputLogin.addEventListener('blur', function () {
         eyeIcon.style.display = 'none'; // Esconde o ícone ao perder o foco
     });
 
     // Cadastro de usuário
-    const passwordInputRegister = document.getElementById('register-password'); // Renomeado
+    const passwordInputRegister = document.getElementById('register-password');
     const confirmpasswordInputRegister = document.getElementById('repeat-password');
-    document.getElementById('register-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+    const errorMessage = document.getElementById('register-error-message'); // Para mostrar as mensagens de erro
 
-        const email = document.getElementById('register-email').value;
-        const password = passwordInputRegister.value; // Usando a nova variável
+    // Função de validação de senha em tempo real
+    function validatePassword() {
+        const password = passwordInputRegister.value;
         const repeatpassword = confirmpasswordInputRegister.value;
-        const errorMessage = document.getElementById('register-error-message');
 
-        // Verifica se a senha tem pelo menos 6 caracteres
+        // Se a senha tiver menos de 6 caracteres, exibe mensagem de erro
         if (password.length < 6) {
             errorMessage.textContent = 'A senha deve ter pelo menos 6 caracteres.';
             errorMessage.style.color = 'red';
+            errorMessage.classList.remove('d-none'); // Torna a mensagem visível
+        } 
+        // Se a senha tiver 6 ou mais caracteres e não houver o campo de confirmação de senha preenchido
+        else if (password.length >= 6 && !repeatpassword) {
+            errorMessage.textContent = 'Senha válida!';
+            errorMessage.style.color = 'green';
+            errorMessage.classList.remove('d-none'); // Torna a mensagem visível
             setTimeout(() => {
-                errorMessage.textContent = '';
-            }, 2000);
-            return; // Impede o envio do formulário
-        }
-        else if (password !== repeatpassword){
+                errorMessage.textContent = ''; // Limpa a mensagem após 5 segundos
+                errorMessage.classList.add('d-none'); // Torna a mensagem invisível
+            }, 5000);
+        } 
+        // Quando o campo de senha e confirmação de senha não coincidem
+        else if (password !== repeatpassword && repeatpassword.length > 0) {
             errorMessage.textContent = "As senhas não conferem";
             errorMessage.style.color = 'red';
-            setTimeout(() => {
-                errorMessage.textContent = '';
-            }, 2000);
+            errorMessage.classList.remove('d-none'); // Torna a mensagem visível
+        } 
+        // Se as senhas coincidirem, remove qualquer mensagem
+        else if (password === repeatpassword) {
+            errorMessage.textContent = ''; // Limpa a mensagem
+            errorMessage.classList.add('d-none'); // Torna a mensagem invisível
+        }
+    }
+
+    // Adicionando o evento 'input' nos campos de senha para validar enquanto o usuário digita
+    passwordInputRegister.addEventListener('input', validatePassword);
+    confirmpasswordInputRegister.addEventListener('input', validatePassword);
+
+    // Cadastro de novo usuário
+    document.getElementById('register-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById('register-email').value;
+        const password = passwordInputRegister.value;
+        const repeatpassword = confirmpasswordInputRegister.value;
+        const displayName = document.getElementById('register-display-name').value;
+
+        // Se houver erro nas senhas, não submete o formulário
+        if (password.length < 6) {
+            errorMessage.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+            errorMessage.style.color = 'red';
+            errorMessage.classList.remove('d-none'); // Torna a mensagem visível
+            return; // Impede o envio do formulário
+        } else if (password !== repeatpassword) {
+            errorMessage.textContent = "As senhas não conferem";
+            errorMessage.style.color = 'red';
+            errorMessage.classList.remove('d-none'); // Torna a mensagem visível
             return; // Impede o envio do formulário
         }
 
+        // Criação do usuário no Firebase
         createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            // Limpa os campos do formulário
-            document.getElementById('register-email').value = '';
-            passwordInputRegister.value = ''; // Usando a nova variável
+            .then(async (userCredential) => {
+                // Limpa os campos do formulário
+                document.getElementById('register-email').value = '';
+                passwordInputRegister.value = '';
+                confirmpasswordInputRegister.value = '';
+                document.getElementById('register-display-name').value = '';
 
-            // Mostra o modal de sucesso
-            const successModal = document.getElementById('success-modal');
-            successModal.classList.remove('d-none');
+                // Atualiza o nome do usuário no Firebase Authentication
+                const user = userCredential.user;
+                await updateProfile(user, {
+                    displayName: displayName // Atualiza o nome
+                });
 
-            // Redireciona para a seção de login ao clicar no botão
-            document.getElementById('go-to-login').onclick = function() {
-                document.getElementById('register-section').classList.add('d-none');
-                document.getElementById('login-section').classList.remove('d-none');
-                successModal.classList.add('d-none'); // Fecha o modal
-            };
+                // Console log para verificar se o nome foi atualizado
+                console.log("Nome atualizado com sucesso:", user.displayName);
 
-            // Fecha o modal ao clicar no "X"
-            document.querySelector('.close-button').onclick = function() {
-                successModal.classList.add('d-none');
-            };
-        })
-        .catch((error) => {
-            const errorMessage = document.getElementById('register-error-message');
-            errorMessage.style.color = 'red'; // Define a cor vermelha para a mensagem
-        
-            if (error.code === 'auth/email-already-in-use') {
-                errorMessage.textContent = 'Este email já está em uso.';
-            } else {
-                errorMessage.textContent = error.message; // Exibe outras mensagens de erro
-            }
-        
-            // Exibe a mensagem por 4 segundos
-            setTimeout(() => {
-                errorMessage.textContent = '';
-            }, 4000);
-        });        
+                // Exibe o modal de sucesso
+                const successModal = document.getElementById('success-modal');
+                successModal.classList.remove('d-none');
+
+                // Redireciona para a seção de login ao clicar no botão
+                document.getElementById('go-to-login').onclick = function () {
+                    document.getElementById('register-section').classList.add('d-none');
+                    document.getElementById('login-section').classList.remove('d-none');
+                    successModal.classList.add('d-none'); // Fecha o modal
+                };
+
+                // Fecha o modal ao clicar no "X"
+                document.querySelector('.close-button').onclick = function () {
+                    successModal.classList.add('d-none');
+                };
+            })
+            .catch((error) => {
+                const errorMessage = document.getElementById('register-error-message');
+                errorMessage.style.color = 'red';
+
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage.textContent = 'Este email já está em uso.';
+                } else {
+                    errorMessage.textContent = error.message;
+                }
+
+                setTimeout(() => {
+                    errorMessage.textContent = '';
+                }, 4000);
+            });
     });
 
-    // Manipulação de eventos para o campo de senha no cadastro
-    passwordInputRegister.addEventListener('focus', function() {
-        const errorMessage = document.getElementById('register-error-message');
-        errorMessage.textContent = 'A senha deve ter pelo menos 6 caracteres.';
-        errorMessage.style.color = 'red';
-        errorMessage.classList.remove('d-none');
-    });
 
-    passwordInputRegister.addEventListener('blur', function() {
-        const errorMessage = document.getElementById('register-error-message');
-        if (passwordInputRegister.value.length < 6) {
-            errorMessage.classList.add('d-none');
-        } else {
-            errorMessage.style.color = 'green';
-            errorMessage.textContent = 'Senha válida!';
-            setTimeout(() => {
-                errorMessage.textContent = '';
-            }, 4000);
-        }
-    });
 
     // Recuperação de senha
-document.querySelector('.recovery-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    console.log("Formulário de recuperação enviado!");
+    document.querySelector('.recovery-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        console.log("Formulário de recuperação enviado!");
 
-    const recoverEmailInput = document.getElementById('recover-email');
-    const recoverEmail = recoverEmailInput.value.trim(); // Remove espaços em branco
-    const errorMessage = document.getElementById('recover-error-message');
+        const recoverEmailInput = document.getElementById('recover-email');
+        const recoverEmail = recoverEmailInput.value.trim(); // Remove espaços em branco
+        const errorMessage = document.getElementById('recover-error-message');
 
-    // Verifique se o e-mail é válido
-    if (!recoverEmail) {
-        errorMessage.style.color = 'red';
-        errorMessage.textContent = 'Por favor, insira um e-mail válido.';
-        return;
-    }
-
-    // Enviar o e-mail de recuperação
-    sendPasswordResetEmail(auth, recoverEmail)
-        .then(() => {
-            console.log("Link de recuperação enviado com sucesso!");
-            errorMessage.style.color = 'green';
-            errorMessage.textContent = 'Se esse e-mail estiver cadastrado, você receberá um link de recuperação.';
-
-            // Limpar o campo de entrada
-            recoverEmailInput.value = '';
-
-            setTimeout(() => {
-                errorMessage.textContent = '';
-            }, 4000);
-        })
-        .catch((error) => {
-            console.error("Erro ao enviar o link de recuperação:", error.message);
+        if (!recoverEmail) {
             errorMessage.style.color = 'red';
-            errorMessage.textContent = 'Se esse e-mail estiver cadastrado, você receberá um link de recuperação.';
+            errorMessage.textContent = 'Por favor, insira um e-mail válido.';
+            return;
+        }
 
-            setTimeout(() => {
-                errorMessage.textContent = '';
-            }, 4000);
-        });
-});
+        sendPasswordResetEmail(auth, recoverEmail)
+            .then(() => {
+                console.log("Link de recuperação enviado com sucesso!");
+                errorMessage.style.color = 'green';
+                errorMessage.textContent = 'Se esse e-mail estiver cadastrado, você receberá um link de recuperação.';
 
-    
+                recoverEmailInput.value = '';
+
+                setTimeout(() => {
+                    errorMessage.textContent = '';
+                }, 4000);
+            })
+            .catch((error) => {
+                console.error("Erro ao enviar o link de recuperação:", error.message);
+                errorMessage.style.color = 'red';
+                errorMessage.textContent = 'Se esse e-mail estiver cadastrado, você receberá um link de recuperação.';
+
+                setTimeout(() => {
+                    errorMessage.textContent = '';
+                }, 4000);
+            });
+    });
 
     // Clear inputs
     function clearInputs() {
@@ -233,28 +255,28 @@ document.querySelector('.recovery-form').addEventListener('submit', function(eve
     
     // Alternância entre seções
     document.querySelector('.forgot-password a').onclick = function(e) {
-        e.preventDefault(); // Previne o comportamento padrão do link
+        e.preventDefault();
         clearInputs();
         document.getElementById('login-section').classList.add('d-none');
         document.getElementById('recover-password-section').classList.remove('d-none');
     };
 
     document.querySelector('.register a').onclick = function(e) {
-        e.preventDefault(); // Previne o comportamento padrão do link
+        e.preventDefault();
         clearInputs();
         document.getElementById('login-section').classList.add('d-none');
         document.getElementById('register-section').classList.remove('d-none');
     };
 
     document.querySelector('#recover-password-section .login-link a').onclick = function(e) {
-        e.preventDefault(); // Previne o comportamento padrão do link
+        e.preventDefault();
         clearInputs();
         document.getElementById('recover-password-section').classList.add('d-none');
         document.getElementById('login-section').classList.remove('d-none');
     };
 
     document.querySelector('#register-section .login-link a').onclick = function(e) {
-        e.preventDefault(); // Previne o comportamento padrão do link
+        e.preventDefault();
         clearInputs();
         document.getElementById('register-section').classList.add('d-none');
         document.getElementById('login-section').classList.remove('d-none');
