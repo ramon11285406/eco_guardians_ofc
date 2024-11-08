@@ -11,14 +11,30 @@
 </head>
 <body>
     <!-- Cabeçalho -->
-    <header class="navbar">
-        <a href="index.html" class="navbar-brand">EcoGuardians</a>
+    <header class="navbar navbar-expand-lg navbar-light" style="background-color: #2c6e49;">
+        <a href="index.html" class="navbar-brand" style="color: white;">EcoGuardians</a>
     </header>
 
     <!-- Seção de Doação -->
     <section id="doacao" class="container my-5 py-4">
-        <h2 class="text-center mb-4">Faça uma Doação</h2>
-        <p class="text-center mb-4">Sua contribuição é fundamental para ajudar nossas ONGs a continuarem seus trabalhos e a fazer a diferença na vida de muitas pessoas. Cada doação é um passo importante para manter e expandir os projetos que beneficiam nossa comunidade.</p>
+        <h2 class="text-center mb-4">Escolha uma ONG para Doar</h2>
+        
+        <!-- Filtro de Categoria -->
+        <div class="text-center mb-4">
+            <label for="categoria" class="form-label">Escolha a Categoria da ONG:</label>
+            <select id="categoria" class="form-select" onchange="filtrarOnGsPorCategoria()">
+                <option value="">Selecione uma Categoria</option>
+                <option value="saude">Saúde</option>
+                <option value="educacao">Educação</option>
+                <option value="meio_ambiente">Meio Ambiente</option>
+                <option value="animais">Animais</option>
+            </select>
+        </div>
+
+        <!-- Filtro de ONGs (todas ONGs exibidas inicialmente) -->
+        <div id="ongs-container" class="row">
+            <!-- Todas as ONGs aparecerão aqui ao carregar a página -->
+        </div>
 
         <div class="text-center mb-4">
             <h3>Como sua doação ajuda</h3>
@@ -31,104 +47,124 @@
             <p>Todo valor é bem-vindo e faz uma grande diferença!</p>
         </div>
 
-        <!-- Opções de Doação -->
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Doação via Pix</h4>
-                        <p class="card-text">Faça sua doação de forma rápida e segura através do Pix. Escaneie o QR Code abaixo para enviar sua contribuição diretamente para nossas contas.</p>
-                        <div class="text-center">
-                            <img src="https://via.placeholder.com/200x200?text=QR+Code+Pix" alt="QR Code Pix" class="img-fluid">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Registro de Doação</h4>
-                        <p class="card-text">Se você preferir registrar sua doação para controle e agradecimento, por favor preencha o formulário abaixo.</p>
-                        <form action="submit_doacao.php" method="post">
-                            <div class="mb-3">
-                                <label for="nome" class="form-label">Nome Completo:</label>
-                                <input type="text" id="nome" name="nome" class="form-control" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="email" class="form-label">E-mail:</label>
-                                <input type="email" id="email" name="email" class="form-control" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="telefone" class="form-label">Telefone (opcional):</label>
-                                <input type="tel" id="telefone" name="telefone" class="form-control">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="valor" class="form-label">Valor da Doação:</label>
-                                <input type="number" id="valor" name="valor" class="form-control" step="0.01" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="metodo" class="form-label">Método de Doação:</label>
-                                <select id="metodo" name="metodo" class="form-select" onchange="mostrarCampos(this.value)" required>
-                                    <option value="">Escolha um método</option>
-                                    <option value="pix">Pix</option>
-                                    <option value="transferencia">Transferência Bancária</option>
-                                    <option value="boleto">Boleto Bancário</option>
-                                </select>
-                            </div>
-
-                            <div id="pix-campos" class="d-none">
-                                <h5 class="mt-4">Doação via Pix</h5>
-                                <p>Escaneie o QR Code ou use a chave Pix abaixo para concluir a doação:</p>
-                                <div class="text-center mb-3">
-                                    <img src="https://via.placeholder.com/200x200?text=QR+Code+Pix" alt="QR Code Pix" class="img-fluid">
-                                </div>
-                                <p class="text-center">Chave Pix: <strong>12345678901@pix.com</strong></p>
-                            </div>
-
-                            <div id="transferencia-campos" class="d-none">
-                                <h5 class="mt-4">Doação via Transferência Bancária</h5>
-                                <p>Realize a transferência para os dados bancários abaixo:</p>
-                                <ul>
-                                    <li><strong>Banco:</strong> Banco Exemplo</li>
-                                    <li><strong>Agência:</strong> 1234</li>
-                                    <li><strong>Conta:</strong> 567890-1</li>
-                                    <li><strong>CNPJ:</strong> 12.345.678/0001-90</li>
-                                </ul>
-                                <p>Por favor, envie um e-mail para <a href="mailto:contato@exemplo.com">contato@exemplo.com</a> confirmando sua doação.</p>
-                            </div>
-
-                            <div id="boleto-campos" class="d-none">
-                                <h5 class="mt-4">Doação via Boleto Bancário</h5>
-                                <p>Para efetuar sua doação por boleto, clique no botão abaixo para gerar o boleto:</p>
-                                <div class="text-center">
-                                    <a href="#" class="btn btn-primary">Gerar Boleto</a>
-                                </div>
-                                <p>Após o pagamento, envie o comprovante para <a href="mailto:contato@exemplo.com">contato@exemplo.com</a>.</p>
-                            </div>
-
-                            <div class="text-center mt-4">
-                                <button type="button" class="btn btn-primary" onclick="doacao()">Registrar Doação</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Botão de Voltar à Página Inicial -->
         <div class="text-center mt-4">
             <a href="index.html" class="btn btn-secondary">Voltar para a Página Inicial</a>
         </div>
     </section>
-   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-rbsA22s+V/LGTq0WB8xOwoARLcdXprP5S7h6Z9dVs5A+F7w2S2W6eZbRfOkT/QI" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
-    <script src="/scripts_js/firebaseinit.js"></script>    
-    <script src="./scripts_js/doacao.js"></script>
+
+    <script>
+        // Dados das ONGs
+        const ongs = {
+            saude: [
+                {
+                    nome: "Hospitais para Todos",
+                    chavePix: "12345678901@pix.com",
+                    contaBancaria: "Banco Exemplo, Agência 1234, Conta 567890-1",
+                    localizacao: "São Paulo, SP",
+                    resumo: "Hospitais para Todos oferece serviços médicos gratuitos a comunidades carentes."
+                },
+                {
+                    nome: "Coração Solidário",
+                    chavePix: "98765432101@pix.com",
+                    contaBancaria: "Banco Solidariedade, Agência 4321, Conta 098765-1",
+                    localizacao: "Rio de Janeiro, RJ",
+                    resumo: "A ONG Coração Solidário realiza cirurgias cardíacas gratuitas para pessoas de baixa renda."
+                }
+            ],
+            educacao: [
+                {
+                    nome: "Ensino para Todos",
+                    chavePix: "32165498700@pix.com",
+                    contaBancaria: "Banco Exemplo, Agência 5678, Conta 123456-7",
+                    localizacao: "Belo Horizonte, MG",
+                    resumo: "Oferece cursos e materiais educativos gratuitos para crianças de regiões carentes."
+                }
+            ],
+            meio_ambiente: [
+                {
+                    nome: "Verde Para Todos",
+                    chavePix: "74125896300@pix.com",
+                    contaBancaria: "Banco Verde, Agência 8765, Conta 543210-9",
+                    localizacao: "Curitiba, PR",
+                    resumo: "Trabalha com projetos de reflorestamento e conservação ambiental."
+                }
+            ],
+            animais: [
+                {
+                    nome: "Amigos Peludos",
+                    chavePix: "15935746800@pix.com",
+                    contaBancaria: "Banco Animal, Agência 1357, Conta 246813-2",
+                    localizacao: "Porto Alegre, RS",
+                    resumo: "Resgata e cuida de animais abandonados, oferecendo abrigo e atendimento veterinário."
+                }
+            ]
+        };
+
+        // Função para exibir todas as ONGs
+        function exibirTodasAsOnGs() {
+            const ongsContainer = document.getElementById("ongs-container");
+            ongsContainer.innerHTML = ""; // Limpar o conteúdo anterior
+
+            // Exibir todas as ONGs, sem filtro
+            Object.keys(ongs).forEach(categoria => {
+                ongs[categoria].forEach(ong => {
+                    const ongCard = document.createElement("div");
+                    ongCard.classList.add("col-md-4", "mb-4");
+
+                    ongCard.innerHTML = `
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">${ong.nome}</h4>
+                                <p><strong>Localização:</strong> ${ong.localizacao}</p>
+                                <p><strong>Resumo:</strong> ${ong.resumo}</p>
+                                <h5 class="mt-3">Chave Pix:</h5>
+                                <p>${ong.chavePix}</p>
+                                <h5>Conta Bancária:</h5>
+                                <p>${ong.contaBancaria}</p>
+                            </div>
+                        </div>
+                    `;
+                    ongsContainer.appendChild(ongCard);
+                });
+            });
+        }
+
+        // Função para filtrar ONGs por categoria
+        function filtrarOnGsPorCategoria() {
+            const categoriaSelecionada = document.getElementById("categoria").value;
+            const ongsContainer = document.getElementById("ongs-container");
+            ongsContainer.innerHTML = ""; // Limpar o conteúdo anterior
+
+            if (categoriaSelecionada && ongs[categoriaSelecionada]) {
+                ongs[categoriaSelecionada].forEach(ong => {
+                    const ongCard = document.createElement("div");
+                    ongCard.classList.add("col-md-4", "mb-4");
+
+                    ongCard.innerHTML = `
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">${ong.nome}</h4>
+                                <p><strong>Localização:</strong> ${ong.localizacao}</p>
+                                <p><strong>Resumo:</strong> ${ong.resumo}</p>
+                                <h5 class="mt-3">Chave Pix:</h5>
+                                <p>${ong.chavePix}</p>
+                                <h5>Conta Bancária:</h5>
+                                <p>${ong.contaBancaria}</p>
+                            </div>
+                        </div>
+                    `;
+                    ongsContainer.appendChild(ongCard);
+                });
+            } else {
+                ongsContainer.innerHTML = "<p class='text-center'>Selecione uma categoria para visualizar as ONGs.</p>";
+            }
+        }
+
+        // Exibir todas as ONGs quando a página for carregada
+        window.onload = exibirTodasAsOnGs;
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-8Y4V9vv0PIV74vWh19kmPljoq75HkLfgmj/npFmlfhQ0XFOo6Rt/D8M3jUJlhYeg" crossorigin="anonymous"></script>
 </body>
 </html>

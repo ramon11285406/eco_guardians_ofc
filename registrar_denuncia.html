@@ -3,73 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar uma Denúncia - EcoGuardians</title>
+    <title>Faça uma Doação - [Nome do Site]</title>
     <link rel="shortcut icon" href="logo fundo preto/EcoGuardians/favicon_32x32.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./style_css/registrar_denuncia.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style_css/doação.css">
 </head>
 <body>
-    <header class="navbar">
-        <a href="index.html" class="navbar-brand">EcoGuardians</a>
+    <!-- Cabeçalho -->
+    <header class="navbar navbar-expand-lg navbar-light" style="background-color: #2c6e49;">
+        <a href="index.html" class="navbar-brand" style="color: white;">EcoGuardians</a>
     </header>
-    
-    <section id="denuncia" class="container my-5 py-4">
-        <h2 class="text-center mb-4">Registrar uma Denúncia</h2>
-        <p class="text-center mb-4">Para registrar uma denúncia, preencha o formulário abaixo.</p>
-        <form id="denuncia-form">
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome Completo:</label>
-                <input type="text" id="nome" name="nome" class="form-control" required>
-            </div>
 
-            <div class="mb-3">
-                <label for="email" class="form-label">E-mail:</label>
-                <input type="email" id="email" name="email" class="form-control" required>
-            </div>
+    <!-- Seção de Doação -->
+    <section id="doacao" class="container my-5 py-4">
+        <h2 class="text-center mb-4">Escolha uma ONG para Doar</h2>
+        
+        <!-- Filtro de Categoria -->
+        <div class="text-center mb-4">
+            <label for="categoria" class="form-label">Escolha a Categoria da ONG:</label>
+            <select id="categoria" class="form-select" onchange="filtrarOnGsPorCategoria()">
+                <option value="">Selecione uma Categoria</option>
+                <option value="desmatamento">Desmatamento Ilegal</option>
+                <option value="poluicao">Poluição</option>
+                <option value="caca_pesca">Caça e Pesca Ilegal</option>
+                <option value="construcoes">Construções Irregulares</option>
+                <option value="contrabando_animais">Contrabando de Animais Silvestres</option>
+                <option value="degradacao_ecossistemas">Degradação de Ecossistemas</option>
+                <option value="descarte_residuos">Descarte Irregular de Resíduos</option>
+                <option value="agrotoxicos">Uso de Agrotóxicos Ilegais</option>
+                <option value="exploracao_mineral">Exploração Mineral Ilegal</option>
+            </select>
+        </div>
 
-            <div class="mb-3">
-                <label for="telefone" class="form-label">Telefone (opcional):</label>
-                <input type="tel" id="telefone" name="telefone" class="form-control">
-            </div>
+        <!-- Filtro de ONGs (todas ONGs exibidas inicialmente) -->
+        <div id="ongs-container" class="row">
+            <!-- Todas as ONGs aparecerão aqui ao carregar a página -->
+        </div>
 
-            <div class="mb-3">
-                <label for="tipo" class="form-label">Tipo de Denúncia:</label>
-                <select id="tipo" name="tipo" class="form-select" required>
-                    <option value="corrupcao">Desmatamento Ilegal</option>
-                    <option value="assedio">Poluição</option>
-                    <option value="violacao">Caça e Pesca Ilegal</option>
-                    <option value="violacao">Construções Irregulares</option>
-                    <option value="violacao">Contrabando de Animais Silvestres</option>
-                    <option value="violacao">Degradação de Ecossistemas</option>
-                    <option value="violacao">Descarte Irregular de Resíduos</option>
-                    <option value="violacao">Uso de Agrotóxicos Ilegais</option>
-                    <option value="violacao">Exploração Mineral Ilegal</option>
-                </select>
-            </div>
+        <div class="text-center mb-4">
+            <h3>Como sua doação ajuda</h3>
+            <p>Com suas doações, podemos:</p>
+            <ul class="list-unstyled">
+                <li>&#8226; Financiar programas e atividades das ONGs.</li>
+                <li>&#8226; Adquirir recursos e materiais necessários.</li>
+                <li>&#8226; Garantir o funcionamento contínuo e a expansão dos projetos.</li>
+            </ul>
+            <p>Todo valor é bem-vindo e faz uma grande diferença!</p>
+        </div>
 
-            <div class="mb-3">
-                <label for="descricao" class="form-label">Descrição Detalhada:</label>
-                <textarea id="descricao" name="descricao" class="form-control" rows="5" required></textarea>
-            </div>
-
-            <div class="mb-3">
-                <label for="anexos" class="form-label">Anexos (opcional):</label>
-                <input type="file" id="anexos" name="anexos" class="form-control">
-            </div>
-
-            <div id="message-container" class="alert alert-danger" style="display: none;"></div> 
-
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </div>
-        </form>
-
-        <p class="text-center mt-4">Leia nossa <a href="#">Política de Privacidade</a> para mais informações.</p>
+        <!-- Botão de Voltar à Página Inicial -->
         <div class="text-center mt-4">
-            <a href="canal_de_denuncias.html" class="btn btn-secondary">Voltar para Página Anterior</a>
+            <a href="index.html" class="btn btn-secondary">Voltar para a Página Inicial</a>
         </div>
     </section>
-    <script type="module" src="./scripts_js/registrardenuncia.js"></script>
- 
+
+    <script>
+        // Dados das ONGs
+        const ongs = {
+            desmatamento: [
+                {
+                    nome: "Floresta Viva",
+                    chavePix: "12345678901@pix.com",
+                    contaBancaria: "Banco Verde, Agência 2345, Conta 987654-3",
+                    localizacao: "Acre, Brasil",
+                    resumo: "A ONG Floresta Viva combate o desmatamento ilegal e promove o reflorestamento na Amazônia."
+                }
+            ],
+            poluicao: [
+                {
+                    nome: "Ar Limpo",
+                    chavePix: "32165498700@pix.com",
+                    contaBancaria: "Banco Limpeza, Agência 1234, Conta 567890-1",
+                    localizacao: "São Paulo, SP",
+                    resumo: "Ar Limpo atua na conscientização e redução da poluição do ar em grandes cidades."
+                }
+            ],
+            caca_pesca: [
+                {
+                    nome: "Vida Selvagem",
+                    chavePix: "74125896300@pix.com",
+                    contaBancaria: "Banco Wild, Agência 6789, Conta 234567-8",
+                    localizacao: "Pantanal, MS",
+                    resumo: "A ONG Vida Selvagem luta contra a caça e pesca ilegal de espécies ameaçadas."
+                }
+            ],
+            construcoes: [
+                {
+                    nome: "Terras Protegidas",
+                    chavePix: "15935746800@pix.com",
+                    contaBancaria: "Banco Solidário, Agência 2468, Conta 135792-0",
+                    localizacao: "Rio de Janeiro, RJ",
+                    resumo: "Terras Protegidas trabalha contra as construções irregulares em áreas de preservação ambiental."
+                }
+            ],
+            contrabando_animais: [
+                {
+                    nome: "Proteção Animal",
+                    chavePix: "98765432101@pix.com",
+                    contaBancaria: "Banco Verde, Agência 1357, Conta 246813-2",
+                    localizacao: "Curitiba, PR",
+                    resumo: "A ONG Proteção Animal combate o contrabando de animais silvestres e promove sua reabilitação."
+                }
+            ],
+            degradacao_ecossistemas: [
+                {
+                    nome: "Ecossistemas em Risco",
+                    chavePix: "85296374100@pix.com",
+                    contaBancaria: "Banco ProNatureza, Agência 1597, Conta 357924-1",
+                    localizacao: "Manaus, AM",
+                    resumo: "Ecossistemas em Risco foca na restauração de ecossistemas degradados pela ação humana."
+                }
+            ],
+            descarte_residuos: [
+                {
+                    nome: "Mundo Limpo",
+                    chavePix: "36925814700@pix.com",
+                    contaBancaria: "Banco Limpeza, Agência 7531, Conta 852963-7",
+                    localizacao: "Belo Horizonte, MG",
+                    resumo: "A ONG Mundo Limpo educa e combate o descarte irregular de resíduos em áreas urbanas."
+                }
+            ],
+            agrotoxicos: [
+                {
+                    nome: "Agricultura Sustentável",
+                    chavePix: "45678901234@pix.com",
+                    contaBancaria: "Banco Agro, Agência 2468, Conta 135792-3",
+                    localizacao: "Ribeirão Preto, SP",
+                    resumo: "Agricultura Sustentável promove a utilização de métodos agrícolas sem o uso de agrotóxicos ilegais."
+                }
+            ],
+            exploracao_mineral: [
+                {
+                    nome: "Minerais em Perigo",
+                    chavePix: "15975345600@pix.com",
+                    contaBancaria: "Banco Minerar, Agência 4567, Conta 987654-0",
+                    localizacao: "Minas Gerais, MG",
+                    resumo: "A ONG Minerais em Perigo luta contra a exploração mineral ilegal em regiões sensíveis."
+                }
+            ]
+        };
+
+        // Função para exibir todas as ONGs
+        function exibirTodasAsOnGs() {
+            const ongsContainer = document.getElementById("ongs-container");
+            ongsContainer.innerHTML = ""; // Limpar o conteúdo anterior
+
+            // Exibir todas as ONGs, sem filtro
+            Object.keys(ongs).forEach(categoria => {
+                ongs[categoria].forEach(ong => {
+                    const ongCard = document.createElement("div");
+                    ongCard.classList.add("col-md-4", "mb-4");
+
+                    ongCard.innerHTML = `
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">${ong.nome}</h4>
+                                <p><strong>Localização:</strong> ${ong.localizacao}</p>
+                                <p><strong>Resumo:</strong> ${ong.resumo}</p>
+                                <h5 class="mt-3">Chave Pix:</h5>
+                                <p>${ong.chavePix}</p>
+                                <h5>Conta Bancária:</h5>
+                                <p>${ong.contaBancaria}</p>
+                            </div>
+                        </div>
+                    `;
+                    ongsContainer.appendChild(ongCard);
+                });
+            });
+        }
+
+        // Função para filtrar ONGs por categoria
+        function filtrarOnGsPorCategoria() {
+            const categoriaSelecionada = document.getElementById("categoria").value;
+            const ongsContainer = document.getElementById("ongs-container");
+            ongsContainer.innerHTML = ""; // Limpar o conteúdo
+
+            // Se não houver categoria selecionada, exibe todas as ONGs
+            if (!categoriaSelecionada) {
+                exibirTodasAsOnGs();
+                return;
+            }
+
+            // Exibe ONGs da categoria selecionada
+            ongs[categoriaSelecionada].forEach(ong => {
+                const ongCard = document.createElement("div");
+                ongCard.classList.add("col-md-4", "mb-4");
+
+                ongCard.innerHTML = `
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">${ong.nome}</h4>
+                            <p><strong>Localização:</strong> ${ong.localizacao}</p>
+                            <p><strong>Resumo:</strong> ${ong.resumo}</p>
+                            <h5 class="mt-3">Chave Pix:</h5>
+                            <p>${ong.chavePix}</p>
+                            <h5>Conta Bancária:</h5>
+                            <p>${ong.contaBancaria}</p>
+                        </div>
+                    </div>
+                `;
+                ongsContainer.appendChild(ongCard);
+            });
+        }
+
+        // Exibir todas as ONGs ao carregar a página
+        window.onload = exibirTodasAsOnGs;
+    </script>
+
 </body>
 </html>
