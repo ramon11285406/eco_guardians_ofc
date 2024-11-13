@@ -11,8 +11,8 @@ function enviarmensagem() {
             limpatela();
             alert("Mensagem enviada")
         })
-        .catch(() => {
-            alert("Mensagem não enviada")
+        .catch((erro) => {
+            alert(erro)
         })
 }
 
