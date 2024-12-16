@@ -19,6 +19,8 @@
     <div class="sidebar">
         <button class="nav-button btn btn-outline-success" id="show-reports">Andamento das Denúncias</button>
         <button class="nav-button btn btn-outline-primary" id="create-post-btn">Criar Publicação</button>
+        <button class="nav-button btn btn-outline-info" id="show-volunteers">Voluntários</button>
+        <button class="nav-button btn btn-outline-warning" id="show-contacts">Contatos</button>
     </div>
 
     <!-- Seção de Administração -->
@@ -31,12 +33,12 @@
 
             <!-- Campo de Pesquisa -->
             <div class="mb-3 text-center">
-                <input type="text" id="search-input" class="form-control" placeholder="Pesquisar por nome ou tipo de denúncia">
+                <input type="text" id="search-reports-input" class="form-control" placeholder="Pesquisar por nome ou tipo de denúncia">
             </div>
             
             <div class="text-center mb-3">
-                <button id="show-all-button" class="btn btn-primary">Mostrar Todas</button>
-                <button id="clear-table-button" class="btn btn-secondary">Limpar Tabela</button>
+                <button id="show-all-reports-button" class="btn btn-primary">Mostrar Todas</button>
+                <button id="clear-reports-table-button" class="btn btn-secondary">Limpar Tabela</button>
             </div>
 
             <!-- Tabela para exibir denúncias -->
@@ -57,6 +59,70 @@
                         <!-- As denúncias serão inseridas aqui -->
                     </tbody>
                 </table>
+            </div>
+        </section>
+
+        <!-- Seção de Voluntários -->
+        <section id="volunteers-section" class="mt-5" style="display: none;">
+            <h3 class="text-center mb-4">Voluntários</h3>
+
+            <!-- Campo de Pesquisa -->
+            <div class="mb-3 text-center">
+                <input type="text" id="search-volunteers-input" class="form-control" placeholder="Pesquisar por nome ou ONG">
+            </div>
+
+            <div class="text-center mb-3">
+                <button id="show-all-volunteers-button" class="btn btn-primary">Mostrar Todos</button>
+                <button id="clear-volunteers-table" class="btn btn-secondary">Limpar Tabela</button>
+            </div>
+
+            <!-- Tabela para exibir voluntários -->
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Interesses</th>
+                        <th>Nome</th>
+                        <th>ONG</th>
+                        <th>Telefone</th>
+                    </tr>
+                    </thead>
+                    <tbody id="volunteers-table-body">
+                    <!-- Linhas de voluntários serão inseridas aqui -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Seção de Contatos -->
+        <section id="contacts-section" class="mt-5" style="display: none;">
+            <h3 class="text-center mb-4">Contatos</h3>
+
+            <!-- Campo de Pesquisa -->
+            <div class="mb-3 text-center">
+                <input type="text" id="search-contacts-input" class="form-control" placeholder="Pesquisar por nome ou mensagem">
+            </div>
+
+            <div class="text-center mb-3">
+                <button id="show-all-contacts-button" class="btn btn-primary">Mostrar Todos</button>
+                <button id="clear-contacts-table" class="btn btn-secondary">Limpar Tabela</button>
+            </div>
+
+            <!-- Tabela para exibir contatos -->
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Mensagem</th>
+                      </tr>
+                    </thead>
+                    <tbody id="contacts-table-body">
+                      <!-- Linhas de contatos serão inseridas aqui -->
+                    </tbody>
+                  </table>
             </div>
         </section>
 
@@ -93,19 +159,6 @@
 
     <script type="module" src="./scripts_js/adm_ong.js"></script>
     <script type="module" src="./scripts_js/criar_post.js"></script>
-    <script>
-        document.getElementById('show-reports').addEventListener('click', function() {
-            document.getElementById('received-reports').style.display = 'block';
-            document.getElementById('create-post').style.display = 'none';
-            window.scrollTo(0, document.getElementById('received-reports').offsetTop);
-        });
-
-        document.getElementById('create-post-btn').addEventListener('click', function() {
-            document.getElementById('create-post').style.display = 'block';
-            document.getElementById('received-reports').style.display = 'none';
-            window.scrollTo(0, document.getElementById('create-post').offsetTop);
-        });
-    </script>
 
 </body>
 </html>
