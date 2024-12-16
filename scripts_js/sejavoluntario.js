@@ -23,7 +23,7 @@ function sejavoluntario() {
 //     limpa.innerHTML="";
 //     limpa = document.getElementById('email').value;
 //     limpa.innerHTML="";
-//     limpa = document.getElementById('telfone').value;
+//     limpa = document.getElementById('telefone').value;
 //     limpa.innerHTML="";
 //     limpa = document.getElementById('interesses').value;
 //     limpa.innerHTML="";
